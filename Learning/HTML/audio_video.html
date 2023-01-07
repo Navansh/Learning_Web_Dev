@@ -5,9 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio and Video</title>
+    <style>
+        #dance
+        {
+            background-color: aqua;
+        }
+    </style>
 </head>
 <body>
-    <input type="video">
-    
+    <br>
+    <br>
+    <br>
+    <audio controls preload="auto" id="dance">
+        <source src="../HTML/misc_assets/audio-captcha.mp3" type="audio/mp3">
+        <!--The type sends the type of file which is going to play like a audio file of type mp3-->
+        Your browser does not support the audio element.
+    </audio>
+
+      <br>
+      <br>
+
+      <video controls preload="auto" 
+      poster="../HTML/misc_assets/youtube-logo-png-46031.png"
+      width="500px" height="400px">
+        <source src="../HTML/misc_assets/Navansh's GitHubUnwrapped.mp4" type="video/mp4">
+        Your browser does not support the video element.
+      </video>
+
 </body>
 </html>

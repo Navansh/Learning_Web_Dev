@@ -10,21 +10,34 @@
         html{
             scroll-behavior:smooth;
         }
+        aside{
+            float : right;
+            width: 50%;
+            background-color: blanchedalmond;
+        }
     </style>
 </head>
 <body>
-    <h1>Linus Torvalds</h1>
+    <header>
+        <h1>Linus Torvalds</h1>
     <p>The creator of Linux</p>
+    </header>
+
+    <nav>
+        <a href="#Resources">Go to Resources</a>&nbsp;
+        <a href="#biography">Go to Biography</a>&nbsp;
+        <a href="#achievements">Go to Achievements</a>
+    </nav>
 
     <figure>
         <img src="../HTML/misc_assets/Linus.jpeg" alt="A photograph of Linus Torvalds">
         <figcaption>A photograph of Linus Torvalds</figcaption>
     </figure>
 
-    <a href="#Resources">Go to Resources</a>
+   
     
     <section>
-    <h2>Biography</h2>
+    <h2 id="biography">Biography</h2>
     <p>Linus Torvalds is a Finnish-American software engineer who is the creator and principal 
         developer of the Linux kernel, which is the kernel for a number of operating systems. 
         He also created the version control system Git. Torvalds was born on December 28, 1969 in
@@ -35,8 +48,20 @@
     </p>
     </section>
 
+    <aside>
+        <p>Linus Torvalds is a Finnish-American software engineer who is the creator and principal 
+            developer of the Linux kernel, which is the kernel for a number of operating systems. 
+            He also created the version control system Git. Torvalds was born on December 28, 1969 in
+             Helsinki, Finland. He studied computer science at the University of Helsinki, and he
+              developed the Linux kernel as a student project in 1991. Since then, the Linux kernel 
+              has become one of the most widely used kernels in the world, powering everything from 
+              smartphones to supercomputers.
+        </p>
+    </aside>
+    <!--But beacuse ye kaafi saara text hai so we have to align it using CSS -->
+
     <section>
-    <h2>Achievements</h2>
+    <h2 id="achievements">Achievements</h2>
     <ul>
         <li><strong>1991</strong> - Created the Linux kernel and the version control system Git</li>
         <li><strong>2004</strong> - Named one of the "100 Most Influential People in the World" by Time magazine in 2004</li>
@@ -74,6 +99,11 @@
     </li>
 </ul>
 </section>
+
+<footer>
+    <p>This is footer</p>
+</footer>
+
 
 </body>
 </html>
