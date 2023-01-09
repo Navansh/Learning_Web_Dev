@@ -1,0 +1,26 @@
+/* Instead of writing in style tag under head tag we write all the same things here in this file */
+p{
+    color: aqua;
+    font-size: x-large;
+}
+table{
+    border: 10px solid black;
+}
+.green{
+    color: blanchedalmond;
+}
+.small{
+    font-size: small;
+}
+.big{
+    font-size: larger;
+}
+#first-button:hover
+{
+    color: orange;
+    font-size: xx-large;
+}
+/* This represents Pseudo-Class Selection */
+a:hover{
+    color: red;
+}
