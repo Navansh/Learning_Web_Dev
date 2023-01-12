@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Positions</title>
+
+    <style>
+        .box{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+        }
+        #box2{
+            position: relative;
+            left: 1320px;
+            bottom: 100px;
+        }
+        #box3{
+            position: relative;
+            top: 500px;
+            left: 1320px;
+        }
+        #box4{
+            position: relative;
+            top: 395px;
+        }
+        #box5{
+            position: relative;
+            top: -100px;
+            left: 45%;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box" id="box1">This is on top Left</div>
+    <div class="box" id="box2">This is on top Right</div>
+    <div class="box" id="box3">This is on bottom right</div>
+    <div class="box" id="box4">This is on bottom left</div>
+    <div class="box" id="box5">This is in Center</div>
+</body>
+</html>
