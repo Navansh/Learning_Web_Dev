@@ -5,8 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FlexBox</title>
+
+    <style>
+        .container{
+            height: 500px;
+            border: 2px solid black;
+            border-top: 1px solid black; 
+            display: flex;
+            flex-direction: row;
+            /* Can be used to alter the main-axis of the flex,(default - horizontal) */
+            /* flex-wrap: wrap; */
+            /* flex-flow: column-reverse wrap; */
+
+            /* justify-content: center;
+            justify-content: flex-start;
+            justify-content: flex-end;
+            justify-content: first baseline;
+            justify-content: space-around;
+            /* sirf blocks ke beech mein equal spacing  uske liye do :*/
+            /* justify-content: space-evenly;
+            justify-content: space-between; */
+
+            justify-content: center;
+            align-items: center;
+            /* align-items: baseline; */
+            /* gap: 10px; */
+            /* align-content: flex-end; */
+
+        }
+        .box{
+            border: 2px solid orange;
+            background-color: aqua;
+            
+            /* but this property alone won't be enough to specify width for a flexbox */
+            /* you also need to apply flex wrap to the container */
+            order: 5;
+            /* this sets the default order of all the flex items of this class to be 5 */
+            /* hence isse bada hoga toh peeche jayega otherwise not */
+            /* flex-grow: 2; */
+            /* width: 100px; */
+            /* inn dono se same kaam but width se toh overlfown content cut ho jaata hai */
+            /* but flexbasis se width hi increase ho jaati hai */
+            flex-basis: 50%;
+
+        } 
+        #div1{
+            order: 5;
+            /* flex-shrink: 4; */
+            align-self: flex-end;
+        }
+        #div2{
+            order: 6;
+            /* flex-shrink: 3; */
+            align-self: stretch;
+        }
+        #div3{
+            order: 6;
+            /* flex-shrink: 2; */
+            /* flex-grow: 2; */
+            align-self: flex-start;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="box" id="div1"><h1>Box-1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, fugiat?</h1></div>
+        <div class="box" id="div2"><h3>Box 2</h3></div>
+        <br>
+        <div class="box" id="div3"><h2>Box 3</h2></div>
+        <div class="box" id="div4"><h4>Box 4</h4></div>
+    </div>
 </body>
 </html>
