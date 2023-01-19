@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>properties</title>
+
+    <style>
+      .container {
+        border: 1px solid brown;
+        background-color: yellow;
+        display: grid;
+        height: 700px;
+        width: 600px;
+        grid-template-columns: repeat(3,100px);
+        grid-template-rows: repeat(2,100px);
+        grid-gap: 10px;
+        
+        /* justify-content: center;
+        justify-content: end;
+        justify-content: space-between; */
+
+        /* align-items: baseline; */
+        /* content ko baseline lete huye sabko(grid items) adjust kardeta hai */
+        align-content: space-between;
+      }
+      .box{
+        background-color: aqua;
+        border: 1px solid red;
+      }
+      #header{
+        justify-self: start;
+        justify-self: end;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box" id="header">Header</div>
+      <div class="box" id="sidebar">sidebar</div>
+      <div class="box" id="content">content</div>
+      <div class="box" id="footer">footer</div>
+      <div class="box" id="content">content</div>
+      <div class="box" id="footer">footer</div>
+
+    </div>
+  </body>
+</html>

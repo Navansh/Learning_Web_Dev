@@ -4,36 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Posts</title>
 
     <style>
-        *{
+         *{
             margin: 0;
             padding: 0;
         }
         .container{
-            height: 1050px;
+            height: 750px;
+            width: 500px;
             border: 5px solid red;
             background-color: yellow;
-            display: grid;
-
-            /* grid-template-rows: 30px 150px 400px 30px;
-            grid-template-columns: 400px;
-
-            grid-template-areas: 
+            display: grid; 
+            grid-template-rows: 30px 1fr 1fr 30px;
+            grid-template-columns: 1fr;
+            grid-template-areas:
             "ht"
             "side"
             "main"
-            "ft"; */
-            /* now using these as attributes we can give them properties under any class or id */
+            "ft" ;
+            grid-gap: 4px;
 
-            grid-template-columns: 300px 300px 300px;
-            grid-template-rows: 250px 600px;
-            grid-template-areas: 
-            "ht ht ht ht ht ht ht ht"
-            /* isse hampe ht ko 8 cols mein span karwa diya and same for ft */
-            "side main main main main main main main"
-            "ft ft ft ft ft ft ft ft";
         }
         .box{
             border: 1px solid black;
@@ -54,15 +46,14 @@
     </style>
 </head>
 <body>
-
     <div class="container">
-        <div class="box" id="header">
-            <a href="posts.html">Go to Posts</a>
+        <div class="box" id="header"><a href="grid-template-area.htm">
+            Click to move backwards
+        </a>
         </div>
         <div class="box" id="sidebar">sidebar</div>
         <div class="box" id="content">content</div>
         <div class="box" id="footer">footer</div>
     </div>
-    
 </body>
 </html>
