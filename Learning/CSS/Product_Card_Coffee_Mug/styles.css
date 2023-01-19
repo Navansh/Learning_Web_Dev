@@ -31,10 +31,12 @@
 .card-box{
     background-color: white;
     position: absolute;
-    height: 45%;
+    height: 50%;
+    max-height: fit-content;
+    min-height: 55%;
     width: 50%;
-    max-width: 700px;
-    min-width: 650px;
+    /* max-width: 700px; */
+    /* min-width: 650px; */
     display: flex;
     justify-content: space-between;
     border-radius: 1.5em;
@@ -45,14 +47,15 @@
     position: absolute;
     /* rgb(60,128,103) */
     height: 100%;
-    width: 50%;
+    width: 45%;
     object-fit: fill;
 }
 .card-text{
     position: absolute;
-    width: 50%;
+    width: 55%;
     height: 100%;
-    transform: translateX(105%);
+    transform: translateX(90%);
+    overflow-y: auto;
 }
 #text-heading{
     margin-top: 1.5em;
@@ -67,7 +70,9 @@
 #second-heading{
     margin: 0.6em 0 0.7em ;
     font-size: 32px;
-    width: 80%;
+    /* width: 80%; */
+    min-width: 60%;
+    max-width: 70%;
     font-weight: bolder;
     line-height: 1;
     margin-block-start: 0.83em;
@@ -76,7 +81,7 @@
 }
 #desc{
     font-family: 'Montserrat', sans-serif;
-    width: 96%;
+    width: 90%;
     font-weight: 700;
     margin-bottom: 1.5rem;
     margin-block-start: 1em;
@@ -91,7 +96,7 @@
     font-weight: 700;
     font-size: 2em;
     line-height: 1;
-    margin: 0.6em 0 0.7em 0 ;
+    margin: 0.6em 0 0.7em 0;
 }
 #price{
     margin-bottom: 1.5em;
@@ -102,7 +107,7 @@
 }
 #add-to-cart{
     margin: 2em 0 1em 0;
-    width: 90%;
+    width: 85%;
     padding: 1em 0;
     background-color:rgb(61,128,104);
     color: white;

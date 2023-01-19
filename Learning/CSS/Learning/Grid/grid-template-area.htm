@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            height: 850px;
+            border: 1px solid red;
+            background-color: yellow;
+            display: grid;
+
+            /* grid-template-rows: 30px 150px 400px 30px;
+            grid-template-columns: 400px;
+
+            grid-template-areas: 
+            "ht"
+            "side"
+            "main"
+            "ft"; */
+            /* now using these as attributes we can give them properties under any class or id */
+
+            grid-template-columns: 300px 300px 300px;
+            grid-template-rows: 250px 600px;
+            grid-template-areas: 
+            "ht ht ht ht ht ht ht ht"
+            /* isse hampe ht ko 8 cols mein span karwa diya and same for ft */
+            "side side side main main main main main"
+            "ft ft ft ft ft ft ft ft";
+        }
+        .box{
+            border: 1px solid black;
+            background-color: aqua;
+        }
+        #header{
+            grid-area: ht;
+        }
+        #footer{
+            grid-area: ft;
+        }
+        #content{
+            grid-area: main;
+        }
+        #sidebar{
+            grid-area: side;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box" id="header">Header</div>
+        <div class="box" id="sidebar">sidebar</div>
+        <div class="box" id="content">content</div>
+        <div class="box" id="footer">footer</div>
+    </div>
+    
+</body>
+</html>
