@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transitions</title>
+
+    <style>
+      .container {
+        border: 3px solid brown;
+        background-color: green;
+        height: 500px;
+        width: 500px;
+        display: flex;
+      }
+      .box {
+        border: 2px solid orange;
+        background-color: aqua;
+        margin: 50px;
+        height: 150px;
+        width: 150px;
+
+        transition: 1s;
+        /* transition-property:all ; */
+        /* "all" likhna is a bad practice because isse performance pe impact pad jaata hai */
+        /* transition-property: background-color; */
+        /* transition-delay: 2s; */
+
+        transition: background-color 1s ease-in-out 1s;
+        transition: transform 5s cubic-bezier(1,-0.36,.16,.67);
+        /* transition: background 1s ; */
+      }
+      .box:hover{
+        background-color: brown;
+        /* transform: rotate(55deg); */
+        transform: translateX(400px) rotate(360deg) scale(2);
+        /* background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c); */
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">Mein ek box hu</div>
+    
+    </div>
+  </body>
+</html>
