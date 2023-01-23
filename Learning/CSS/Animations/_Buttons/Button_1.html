@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button 1</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        border: 5px solid red;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* position: relative; */
+        background-color: black;
+      }
+      .button-animated {
+        position: relative;
+        width: 212px;
+        height: 50px;
+        outline: none;
+        color: #fff;
+        border: none;
+        background: #111;
+        cursor: pointer;
+        z-index: 0;
+        border-radius: 10px;
+
+        /* animation-name: button-ani;
+                  animation-duration: 1s;
+                  animation-iteration-count: infinite;
+                  animation-timing-function: ease-out;
+                  animation-fill-mode: forwards;
+                  animation-direction: reverse; */
+      }
+      .button-animated:before {
+        content: "";
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff7300,
+          #fffb00,
+          #48ff00,
+          #00ffd5,
+          #002bff,
+          #7a00ff,
+          #ff00c8,
+          #ff0000
+        );
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        background-size: 400%;
+        z-index: -1;
+        filter: blur(5px);
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        animation: glows 20s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        border-radius: 10px;
+      }
+      .button-animated:active {
+        color: #000;
+      }
+      .button-animated:active:after {
+        background: transparent;
+      }
+
+      .button-animated:hover:before {
+        opacity: 1;
+      }
+      .button-animated:after {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #111;
+        left: 0;
+        top: 0;
+        border-radius: 10px;
+      }
+      @keyframes glows {
+        0% {
+          background-position: 0 0;
+        }
+        50% {
+          background-position: 400% 0;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button class="button-animated">Hit Me</button>
+    </div>
+  </body>
+</html>
