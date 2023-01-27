@@ -297,5 +297,155 @@ a {
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
+  gap: 120px;
+}
+.project-card{
+  width: 90%;
+  height: 550px;
+  position: relative;
+  /* background-image: url(./images/projects/Project1.png); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 40px #1f1f1f;
+}
+.project-card:hover .project-number{
+   display: block;
+   transition: 40s;
+}
+.project-card::after{
+  /* after pseudo - selector for the black tint  */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* ye top right left ye sab karne se ham after wali cheez ko poore card par overlap karwa sakte hai  */
+  background-color: #1f1f1f9a;
+  z-index: 0;
+  /* transform: scaleX(1); */
+}
+.project-card::before{
+  /* before pseudoselector for sliding window wala effect ke liye  */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: linear-gradient(45deg, #343d68, #343d68be, #343d687c);
+  transform: scaleX(0);
+  /* slide wale effect ke liye scale wala property ka use kiya and not opacity  */
+  transform-origin: left;
+  transition:all 0.4s;
+  z-index: 1;
+}
+.project-card:hover::before{
+  transform: scaleX(1);
+
+}
+.project-number{
+  position:absolute;
+  font-size: 200px;
+  font-weight: 500;
+  color: white;
+  z-index: 1;
+  display: none;
+  /* kyunki ye sirf hover karte hue display hona chahiye  */
+}
+.card-right-num{
+  right: -40px;
+   top: -45px;
+}
+.card-left-num{
+  left: -40px;
+   top: -45px;
+}
+.project-content{
+  display: flex;
+  position: absolute;
+  /* ye jo kuch bhi iske upar dikhega woh and ye khud bg image ke upar overlap kar rha hoga isliye  */
+  flex-direction: column;
+  color: white;
+  padding: 2em;
+  bottom: 20%;
+  z-index: 5;
+  gap: 1em ;
+  transition: all 0.4s;
+  opacity: 0;
+}
+.project-content-left{
+  left: 10%;
+
+}
+.project-content-right{
+  right: 10%;
   
+}
+.project-skills-container{
+  width: 70%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.project-skill{
+  width: 40px;
+}
+.project-heading{
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 3rem;
+}
+.project-desc{
+  width:70%;
+  font-size: 16px;
+  font-style: italic;
+}
+.btn-grp{
+  display:flex;
+  gap:1.1rem;
+  /* padding: 2em; */
+  align-items:center;
+
+}
+.btn-project:hover{
+  border: none;
+}
+.icon{
+  cursor: pointer;
+  /* gap: 1rem; */
+  color: white;
+  font-size: 35px;
+  transition: 0.4s;
+}
+.icon:hover{
+  color: var(--bgOrange);
+}
+.project-card:hover .project-content{
+  transform: scale(1.1);
+  opacity: 1;
+}
+#project-1{
+  background-image: url(./images/projects/Project1.png);
+  margin-right: 120px;
+  /* 120px hi islye beacuse hamne starting mein project-card ki width 1200px ki 90% hi rakhi thi  */
+}
+#project2{
+  background-image: url(./images/projects/Project2.png);
+  margin-left: 120px;
+  /* 120px hi islye beacuse hamne starting mein project-card ki width 1200px ki 90% hi rakhi thi  */
+
+
+}
+#project3{
+  background-image: url(./images/projects/Project3.png);
+  margin-right: 120px;
+  /* 120px hi islye beacuse hamne starting mein project-card ki width 1200px ki 90% hi rakhi thi  */
+
+}
+#project4{
+  background-image: url(./images/projects/Project4.png);
+  margin-left: 120px;
+  /* 120px hi islye beacuse hamne starting mein project-card ki width 1200px ki 90% hi rakhi thi  */
+
 }
