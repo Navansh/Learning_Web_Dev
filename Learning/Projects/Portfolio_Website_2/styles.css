@@ -3,7 +3,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   scroll-behavior: smooth;
   font-family: "Be Vietnam Pro", sans-serif;
 }
@@ -450,5 +450,69 @@ a {
 
 }
 .tech-stack{
-  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+  margin: 10rem auto;
+  gap: 30px;
+}
+.tech-stack-container-top{
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform: translateY(-7em);
+}
+.tech-stack-container-bottom{
+  display: flex;
+  flex-wrap: wrap;
+  width:100%;
+  position: relative;
+  gap: 2rem;
+  justify-content: center;
+
+}
+.skills-faded-text{
+  position: absolute;
+  font-size: 15em;
+  font-weight: bold;
+  color: rgb(231, 231, 231);
+  bottom: -45.5%;
+  right: -25%;
+  user-select: none;
+}
+.blob-style{
+  position: absolute;
+  transform: translate(-90%,50%);
+  animation: blobAnim 3s linear infinite;
+  z-index: -1;
+  opacity: 0.5;
+  height: 120%;
+  width: 80%;
+  left: 80%;
+  top: -90%;
+}
+@keyframes blobAnim{
+    50%{
+      top: -74%;
+      /* left: -90%; */
+      right: -65%;
+    }
+}
+.skills-logo{
+  width: 90px;
+  transition: 0.4s;
+}
+.skills-logo:hover{
+  transform: scale(1.2);
+}
+.tech-stack-heading{
+ color: var(--bgOrange);
+ font-size: 50px;
+ font-weight: bold;
+ line-height: 50px;
+}
+.caps{
+  font-size: 70px;
 }
