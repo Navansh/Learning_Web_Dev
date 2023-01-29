@@ -162,8 +162,8 @@ a {
 }
 .user-image img{
   z-index: -9;
-  /* width: 311px;
-  height: 351px; */
+  width: 425px;
+  height: 391px;
 }
 @keyframes scaleImage {
   0%{
@@ -614,6 +614,32 @@ footer{
   gap: 1rem;
 }
 @media (max-width:1300px){
+  .hero-section {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: -1rem;
+    padding-bottom: 3rem;
+  }
+  .hero-section-left-desc {
+    text-align: center;
+    margin: auto;
+  }
+  .faded-text {
+    display: none;
+  }
+  #btn-top{
+    display: none;
+  }
+  #btn-bottom{
+    margin-top: -7rem;
+    display: block;
+  }
+  .hero-section-right {
+    margin-top: -6em;
+    scale: 0.7;
+  }
   .page-header{
     padding-top: 30px;
     color: var(--bgOrange);
@@ -662,20 +688,6 @@ footer{
   .project-card:hover .project-number {
     display: none;
   }
-  
-
-}
-@media (max-width:1500px) {
-  .nav-items {
-    padding: 0 8em;
-  }
-}
-@media (max-width:1000px) {
-  .nav-items {
-    display: none;
-  }
-}
-@media (max-width: 1300px) {
   footer {
     padding: 0.5rem;
   }
@@ -686,15 +698,12 @@ footer{
   .footer-faded-text {
     display: none;
   }
-}
-/* Footer End */
-@media (max-width: 1300px) {
   .contact-us-heading {
     font-size: 40px;
     text-align: center;
     padding: 15px 10px;
   }
-  .contact-us-sub-heading{
+  .contact-us-subheading{
     font-size: 20px;
     padding: 0 10px;
     text-align: center;
@@ -712,36 +721,45 @@ footer{
   .form-field {
     width: 90%;
   }
-}
-@media (max-width: 1300px) {
-  .skills-container {
+  .skills-container{
     margin: 0;
     padding: 2em;
     flex-direction: column;
   }
-  .skill-heading {
+  .skill-heading{
     font-size: 40px;
     font: bold;
   }
-  .caps {
+  .caps{
     font-size: 60px;
   }
-  .skill-container-left {
+  .skill-container-left{
     width: 100%;
   }
-  .skill-container-right {
+  .skill-container-right{
     width: 100%;
   }
-  .skills-logo {
+  .skills-logo{
     width: 50px;
   }
-  .skill-fade-text {
+  .skill-fade-text{
     display: none;
   }
-  .skill-subHeading {
+  .skill-subHeading{
     width: 100%;
   }
-  .skill-heading::after {
+  .skill-heading::after{
     bottom: 9%;
+  }
+  
+}
+@media (max-width:1500px){
+  .nav-items {
+    padding: 0 8em;
+  }
+}
+@media (max-width:1000px){
+  .nav-items {
+    display: none;
   }
 }
