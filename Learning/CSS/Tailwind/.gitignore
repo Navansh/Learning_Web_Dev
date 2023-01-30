@@ -1,0 +1,5 @@
+*.pdf
+*.mp4
+*.mp3
+*.mkv
+node_modules
