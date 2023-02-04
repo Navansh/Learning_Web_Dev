@@ -38,3 +38,9 @@
   .newFeatureCard {
     box-shadow: 2px 4px 9px 1px hsla(0, 0%, 0%, 0.05);
   }
+
+  .corefeaturesection{
+    background-size: 100% 100%;
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+  }
