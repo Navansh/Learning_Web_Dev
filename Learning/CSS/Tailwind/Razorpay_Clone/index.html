@@ -562,15 +562,15 @@
                 Explore Razorpay Business Banking</h2>
             <div class="h-1 bg-greenLight w-6 mx-auto mt-4 mb-20"></div>
 
-            <!-- main feature section  -->
-            <div class="w-full min-h-[440px] flex flex-col relative">
+            <!-- main feature section of section 2-->
+            <div class="w-full min-h-[450px] flex flex-col relative">
                 <img src="./assets/x-flame-1.png" alt="" loading="lazy"
-                class="absolute -top-[142px] -left-[140px] w-[200px] z-10">
+                class="absolute -top-[142px] -left-[140px] w-[200px] ">
                 <img src="./assets/x-flame-2.png" alt="" loading="lazy"
                 class="absolute top-[150px] -right-[180px] w-[270px] ">
 
                 <!-- content box  starts-->
-                <div class="flex w-full min-h-[520px] rounded-md p-10 py-12 border z-10 bg-[#181c2e]"> 
+                <div class="flex w-full min-h-[450px] rounded-md p-10 py-10 border border-neutral-600 red z-10 bg-[#181c2e]"> 
                     <!-- left section  -->
                     <div class="flex flex-col justify-between w-full">
                         
@@ -605,33 +605,93 @@
                         </ul>
     
                         <!-- for button and hyperlink -->
-                        <div class="flex flex-row items-center space-x-4">
-                            <button class="bg-lightBlue w-fit text-white py-[14px] px-[18px] rounded-md 
-                            font-mullish font-bold hover:bg-lightBlue500 transition-all duration-200 flex flex-row">
-                                Sign Up Now 
+                        <div class="flex flex-row items-center space-x-4 w-full">
+                            <button class="bg-lightBlue w-fit text-white py-[14px] px-[18px] rounded-md items-center justify-start
+                            font-mullish font-bold hover:bg-lightBlue500 transition-all duration-200 flex flex-row relative md:pr-[90px]">
+                                Sign Up
+                                <!-- sign up ke aage wale patch ki div  -->
+                            <div class="w-12 h-[60px] bg-greenLight absolute right-6 skew-x-[20deg] flex justify-center items-center">
+                                    <!-- arrow ki svg  -->
                                 <svg
-                                    viewBox="0 0 24 24"
-                                    focusable="false"
-                                    class="w-4 h-6 ml-3"
+                                viewBox="0 0 24 24"
+                                focusable="false"
+                                class="w-5 h-5 skew-x-[-20deg]"
                                 >
                                 <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path>
                                 </svg>
+                            </div>
                             </button>
+
+                            <!-- hyperlink wala  -->
                             <div class="flex items-center cursor-pointer group">
                                 <a href="#"
-                                class="font-mullish font-bold text-lightBlue500 group-hover:text-grayBlue transition-all duration-200">
+                                class="font-mullish font-bold text-lightBlue500 group-hover:text-lightBlue transition-all duration-200">
                                 Know More</a>
                                 <i data-feather="chevron-right" 
-                                class="w-5 h-6 text-lightBlue500 group-hover:text-grayBlue transition-all duration-200"></i>
+                                class="w-5 h-6 text-lightBlue500 group-hover:text-lightBlue transition-all duration-200"></i>
                             </div>
                         </div>
                     </div>
-                    <!-- Right side wali image  -->
-                    <div>
-                        <img src="./assets/payment-suite.png" alt=""
+                        <!-- Right side wali image  -->
+                        <div>
+                        <img src="./assets/buisness-banking.png" alt="" loading="lazy"
                         class="absolute max-w-[600px] right-0 bottom-0 ">
-                    </div>
+                        </div>
                         <!-- Content box Ends  -->
+                        
+             </div>
+            </div>
+
+            <!-- Grid Section 2  -->
+            <div class="grid grid-cols-3 w-full gap-4 my-14">
+            <!-- box 1 -->
+            <div class="w-full min-h-[15rem] relative cursor-pointer featureCard2">
+                <!-- box icon  -->
+                <img src="./assets/current-icon.svg" alt=""
+                class="bg-lightBlue absolute right-3 top-3 w-12 h-12 rounded-full z-[8]
+                transition-all duration-200 featureCardIcon">
+                <!-- box shape stylish wali  -->
+                <svg
+                        viewBox="0 0 349.32501220703125 225"
+                        xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="none"
+                        class="stroke-1 stroke-[#818597] h-full w-full absolute z-[9] transition-all duration-200 featureCardSVG"
+                        style="stroke-opacity: 0.15"
+                        >
+                <path
+                        d="m 0 6 
+                    a 6 6 0 0 1 6 -6 
+                    h 250.32501220703125 
+                    a 16 16 0 0 1 11 5 
+                    l 77 77 
+                    a 16 16 0 0 1 5 11 
+                    v 126 
+                    a 6 6 0 0 1 -6 6 
+                    h -337.32501220703125 
+                    a 6 6 0 0 1 -6 -6 
+                    z"
+                        fill="#fff"
+                ></path>
+                    </svg>
+                
+                <!-- box-content  -->
+                <div class="z-[100] absolute w-full h-full flex flex-col justify-between pl-5 py-6 pr-8 featureCardBox">
+                    <!-- text part  -->
+                    <div>
+                        <h3 class="font-mullish font-bold text-deepBlueHead leading-[1.2] text-[1.375rem]">Current Account</h3>
+                        <p class="font-mullish text-grayText mt-6 opacity-75">
+                            Current accounts for fast-growing businesses, supported by the best-in-class technology3
+                        </p>
+                    </div>
+
+                    <!-- hyperlink and know more part  -->
+                    <div class="flex items-center cursor-pointer group ">
+                        <a href="#"
+                        class="font-mullish font-bold text-lightBlue500 group-hover:text-grayBlue transition-all duration-200">
+                        Know More</a>
+                        <i data-feather="chevron-right" 
+                        class="w-5 h-6 text-lightBlue500 group-hover:text-grayBlue transition-all duration-200"></i>
+                    </div>
                 </div>
             </div>
 
@@ -640,7 +700,12 @@
 
 
 
+            <!-- box 2 -->
+            <!-- box 3 -->
+
         </div>
+        </div>
+       
     </section>
 <script>
     feather.replace()
