@@ -53,13 +53,39 @@
     };
 
     //factory function
-function createRectangle() {
+function createRectangle(length,breadth) {
     return rectangle = {
-        length: 1,
-        breadth: 2,
+        length,
+        breadth,
 
         draw: function() {
             console.log('drawing');
         }
     };
 }
+console.log(1);
+// now object creation using factory method 
+let rectangleObj1 = createRectangle(3,4); 
+
+//creating a Constructor for rectangle 
+function Rectangle(len,bre){
+    this.length = len;
+    this.breadth = bre;
+    this.draw = function() { 
+        console.log('drawing');
+    }
+}
+
+//creating object using constructor 
+let rectangleObject = new Rectangle(4,5);
+
+//Dynamic added color to RectangleObject
+rectangleObject.color = 'yellow';
+
+console.log(rectangleObject);
+
+// Dynamic Deletion 
+delete rectangleObject.color;
+console.log(rectangleObject);
+
+
