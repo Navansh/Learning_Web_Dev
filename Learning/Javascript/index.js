@@ -58,12 +58,12 @@ function createRectangle(length,breadth) {
         length,
         breadth,
 
-        draw: function() {
-            console.log('drawing');
-        }
+        // draw: function() {
+        //     console.log('drawing');
+        // }
     };
 }
-console.log(1);
+// console.log(1);
 // now object creation using factory method 
 let rectangleObj1 = createRectangle(3,4); 
 
@@ -82,10 +82,26 @@ let rectangleObject = new Rectangle(4,5);
 //Dynamic added color to RectangleObject
 rectangleObject.color = 'yellow';
 
-console.log(rectangleObject);
+// console.log(rectangleObject);
 
-// Dynamic Deletion 
-delete rectangleObject.color;
-console.log(rectangleObject);
+// // Dynamic Deletion 
+// delete rectangleObject.color;
+// // console.log(rectangleObject);
 
+
+// for (const key in rectangle) {
+//     console.log(key,rectangle[key])
+// }
+
+ // will give error 
+// for (let kets of Object.keys(rectangle)) {
+//     console.log(kets);
+// }
+
+// if ('length' in rectangle) {
+//     console.log('Present');
+// }
+// else{
+//     console.log('Absent');
+// }
 
