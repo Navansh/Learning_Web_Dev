@@ -44,4 +44,5 @@ let courses = [
     //hence doing this does not remove the numbers
 
     nos.length = 0;
+    //but doing this removes the numbers 
     
