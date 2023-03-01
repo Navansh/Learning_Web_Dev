@@ -81,4 +81,52 @@ function interest(p,r=5,y=10){
     return p*r*y/100;
 }
 
-console.log(interest(1000))
+// console.log(interest(1000,8));
+
+//can also declare undefined
+// console.log(interest(1000,8,undefined));
+
+
+//getter and setter methods
+// getter-> access properties
+// setter ->manipulate/change/update properties 
+
+let person = {
+    fName : "Sunidhi",
+    lName : 'Chauhan',
+
+    get fullName(){
+        return `${person.fName} ${person.lName}`;
+    },
+    set fullName(value){
+        if (typeof value!== 'string') {
+            throw new Error("Beta thappad khayega ya joote");
+            //creates an object of error type 
+        }
+        let parts = value.split(' ');
+        //splits and creates an an array
+        this.fName = parts[0];
+        this.lName = parts[1];
+    }
+};
+
+// console.log(person.fullName);
+
+try {
+    person.fullName = undefined;
+} catch (e) {
+    alert(e);
+}
+
+
+person.fullName = 'Rahul Kumar';
+//used setter method 
+
+// console.log(person.fullName);
+//don't need to call it as person.fullName() as it is not a function its a property
+
+
+
+
+
+

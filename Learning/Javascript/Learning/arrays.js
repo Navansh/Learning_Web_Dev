@@ -120,4 +120,9 @@ let courses = [
 //this process is called chaining 
 // console.log(items)
 
+//reducing an array
+let arr =[1,2,44,5,34];
+let ans = arr.reduce((accumulator,currentValue) => accumulator + currentValue, 0);
+//accumulator ki initial value 0 dedi
 
+console.log(ans);
