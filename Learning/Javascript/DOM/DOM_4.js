@@ -123,6 +123,20 @@
 
 // utility();
 
+//Closures
+function init() {
+    let name = "Mozilla"; // name is a local variable created by init
+    function displayName() {
+      // displayName() is the inner function, that forms the closure
+      console.log(name); // use variable declared in the parent function
+    }
+    return displayName;
+}
+let a = init();
+a();
+//a ko call karne par undefined aana chahiye tha, kyunki woh 'name' ko access kar rha hai jo already garbage collector ke 
+// through khatam ho chuka hai, but we still 'Mozilla' printed cz inner function ka jo closure bana hoga
+//wahaan se ye data aa gya hoga
 
 
 
