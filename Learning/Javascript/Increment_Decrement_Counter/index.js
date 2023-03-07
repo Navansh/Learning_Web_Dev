@@ -1,6 +1,6 @@
 const countValue = document.querySelector('#counter');
 
-const increment = ()=> {
+const increment = () => {
     let value = parseInt(countValue.innerText);
     //get the value from UI
     value = value+1;
@@ -9,7 +9,7 @@ const increment = ()=> {
     //set the value on the UI
 };
 
-const decrement = ()=> {
+const decrement = () => {
     let value = parseInt(countValue.innerText);
     //get the value from UI
     value = value-1;
