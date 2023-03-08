@@ -1,3 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    background-color: #000;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  }
+  .wrapper-main{
+    height: 100vh;
+    width: 100vw;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 .user-image{
     border-radius: 50px;
