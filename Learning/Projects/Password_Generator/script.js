@@ -34,10 +34,10 @@ function setIndicator(color){
 }
 
 function getRandomInt(min, max){
-    Math.floor(Math.random() * (max-min)) + min
+   return Math.floor(Math.random() * (max-min)) + min
     //this random function * (max-min) will generate random int from 0 to (max-min) and this is possible that this may come 
     //as floating bhi aa sakti hai so we do round off or floor value
-    // and then add min, so the final range becomes min to (max)
+    // and then add min, so the final range becomes min to (max) where max is EXCLUDED(exclusive)
 }
 
 function generateRandomNumber() {
@@ -131,8 +131,76 @@ allCheckBox.forEach((checkbox) =>{
 })
 
 generateBtn.addEventListener('click',()=>{
+    //null condition -> none of the checkbox are ticked 
+    if(checkCount<=0) return;
 
+    //special case
+    if(passwordLength <= checkCount){
+        passwordLength = checkCount;
+        handleSlider();
+    }
+
+    //let's start the journey to find new password
+    //so first remove old password
+    password = "";
+
+    //first fulfilling the checked conditions then remaining spaces mein apne hisaab se randomly daal denge
+    // if(upperCaseCheck.checked){
+    //     password += generateUpperCase;
+    // }
+    // if(lowerCaseCheck.checked){
+    //     password += generateLowerCase;
+    // }
+    // if(numbersCheck.checked){
+    //     password += generateRandomNumber;
+    // }
+    // if(symbolsCheck.checked){
+    //     password += generateSymbol;
+    // }
+
+    //we'll use diff method
+
+    let funcArr = [];
+
+    if(upperCaseCheck.checked){
+        funcArr.push(generateUpperCase);
+    }
+    if(lowerCaseCheck.checked){
+        funcArr.push(generateLowerCase);
+    }
+    if(numbersCheck.checked){
+        funcArr.push(generateRandomNumber);
+    }
+    if(symbolsCheck.checked){
+        funcArr.push(generateSymbol);
+    }
+
+    //compulsory addition
+    for (let i = 0; i < funcArr.length; i++) {
+        password += funcArr[i]();
+    }
+    //remaining addition
+    for (let i = 0; i < passwordLength - funcArr.length; i++) {
+        let randIndex = getRandomInt(0,funcArr.length);
+        //maalo 4 functions pushed hai to 0 to 3 ke beech ke kisi bhi index ko choose karke uss respective function 
+        // ko call kardo
+        password += funcArr[randIndex]();
+    }
+
+    //now shuffling the generated password 
+    //kyunki warna toh capital letter then lower case then number then symbol(if they are selected ) se hi start hoga 
+    //exactly issi order mein 
+
+    password = shufflePassword();
+
+    //showing the password
+    passwordDisplay.value = password;
+    //display the strength now
+    calcStrength();
 })
+
+
+
 
 
 
