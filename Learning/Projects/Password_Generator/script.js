@@ -13,16 +13,18 @@ const allCheckBox = document.querySelectorAll("input[type=checkbox]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 let password = "";
-let passwordlength = 10;
+let passwordLength = 10;
 let checkCount = 1;
 //set starting color of circle of password strength to grey
 handleSlider();
 
 //sets the password length(passwordLength)
 function handleSlider() {
-    inputSlider.value = passwordlength;
-    lengthDisplay.innerText = passwordlength;
-
+    inputSlider.value = passwordLength;
+    lengthDisplay.innerText = passwordLength;
+    // const min = inputSlider.min;
+    // const max = inputSlider.max;
+    // inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
 }
 
 function setIndicator(color){
@@ -78,11 +80,59 @@ function calcStrength() {
     else setIndicator("#f00")
 }
 
-function copyContent() {
+async function copyContent() {
+    try {
+        await navigator.clipboard.writeText(passwordDisplay.value); 
+        //it return a promise and that's why we use await ki jab promise resolve ho tabhi aage wala lines execute ho
+        copyMsg.innerText = "Copied";
+    } catch (err) {
+        copyMsg.innerText = "Failed"
+    }
+    //to make copied wala text visible
+    copyMsg.classList.add("active");
     
+    setTimeout( () => {
+        copyMsg.classList.remove("active");
+    },2000);
 }
 
+inputSlider.addEventListener('input', (e) => {
+    passwordLength = e.target.value;
+    //e.target.value se slider ki value nikaal sakte hain hum
+    handleSlider();
+})
 
+copyBtn.addEventListener('click', () =>{
+    if(passwordDisplay.value) {
+        //means ki agar passwordDisplay mein koi value hai toh copy kardo otherwise dont 
+        //ye ek truth statement tabhi banegi jab ki value hogi other null hogi jo ek falsy statement hai
+        copyContent();
+    }
+})
+
+function handleCheckBoxChange(){
+    checkCount = 0;
+    allCheckBox.forEach((checkbox) =>{
+        if(checkbox.checked){
+            checkCount++;
+        }
+    });
+    // console.log(checkCount)
+    //also if your password length is smaller than no checkboxes then it is an edge condition, so make it atleast equal
+    if(passwordLength<checkCount)
+    {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+allCheckBox.forEach((checkbox) =>{
+    checkbox.addEventListener('change',handleCheckBoxChange);
+})
+
+generateBtn.addEventListener('click',()=>{
+
+})
 
 
 
