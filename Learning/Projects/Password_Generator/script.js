@@ -14,7 +14,7 @@ const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 let password = "";
 let passwordLength = 10;
-let checkCount = 1;
+let checkCount = 0;
 //set starting color of circle of password strength to grey
 handleSlider();
 
@@ -72,9 +72,9 @@ function calcStrength() {
     if(numbersCheck.checked) hasNum = true;
     if(symbolsCheck.checked) hasSym = true;
 
-    if(hasLower && hasUpper &&(hasNum||hasSym) && passwordlength>=8) { 
+    if(hasLower && hasUpper &&(hasNum||hasSym) && passwordLength>=8) { 
         setIndicator("#0f0");
-    } else if ((hasLower||hasUpper)&& (hasNum||hasSym) && passwordlength>=6) {
+    } else if ((hasLower||hasUpper)&& (hasNum||hasSym) && passwordLength>=6) {
         setIndicator("#ff0");
     }
     else setIndicator("#f00")
@@ -109,6 +109,22 @@ copyBtn.addEventListener('click', () =>{
         copyContent();
     }
 })
+
+function shufflePassword(array){
+    //fow shuffling we have fisher yates method
+    for (let i = array.length - 1; i > 0; i--) {
+        //random J, find out using random function
+        const j = Math.floor(Math.random() * (i + 1));
+        //swap number at i index and j index
+        const temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    let str = "";
+    array.forEach((el) => (str += el));
+    return str;
+}
+
 
 function handleCheckBoxChange(){
     checkCount = 0;
@@ -184,6 +200,7 @@ generateBtn.addEventListener('click',()=>{
         let randIndex = getRandomInt(0,funcArr.length);
         //maalo 4 functions pushed hai to 0 to 3 ke beech ke kisi bhi index ko choose karke uss respective function 
         // ko call kardo
+        // console.log(randIndex);
         password += funcArr[randIndex]();
     }
 
@@ -191,7 +208,7 @@ generateBtn.addEventListener('click',()=>{
     //kyunki warna toh capital letter then lower case then number then symbol(if they are selected ) se hi start hoga 
     //exactly issi order mein 
 
-    password = shufflePassword();
+    password = shufflePassword(Array.from(password));
 
     //showing the password
     passwordDisplay.value = password;
