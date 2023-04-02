@@ -104,7 +104,7 @@ inputSlider.addEventListener('input', (e) => {
 
 copyBtn.addEventListener('click', () =>{
     if(passwordDisplay.value) {
-        //means ki agar passwordDisplay mein koi value hai toh copy kardo otherwise dont 
+        //means ki agar passwordDisplay mein koi value hai toh copy kardo otherwise don't 
         //ye ek truth statement tabhi banegi jab ki value hogi other null hogi jo ek falsy statement hai
         copyContent();
     }
@@ -121,7 +121,7 @@ function shufflePassword(array){
         array[j] = temp;
       }
     let str = "";
-    array.forEach((el) => (str += el));
+    array.forEach((element) => (str += element));
     return str;
 }
 
@@ -198,7 +198,7 @@ generateBtn.addEventListener('click',()=>{
     //remaining addition
     for (let i = 0; i < passwordLength - funcArr.length; i++) {
         let randIndex = getRandomInt(0,funcArr.length);
-        //maalo 4 functions pushed hai to 0 to 3 ke beech ke kisi bhi index ko choose karke uss respective function 
+        //maanlo 4 functions pushed hai to 0 to 3 ke beech ke kisi bhi index ko choose karke uss respective function 
         // ko call kardo
         // console.log(randIndex);
         password += funcArr[randIndex]();
