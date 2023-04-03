@@ -11,6 +11,9 @@ const userInfoContainer = document.querySelector(".user-info-container");
 const API_KEY = "5202e184eaa8737863c454c7beea0306";
 let currentTab = userTab;
 currentTab.classList.add("current-tab");
+getfromSessionStorage();
+//this function is added so that, when a user revists or refreshes the page, the coordinates which were saved in the session storage are fetched
+//  and the weather info is displayed, and hence we do not have to ask the user to grant location access again 
 
 function switchTab(clickedTab) {
     if(clickedTab!=currentTab) {
@@ -88,6 +91,7 @@ async function fetchUserWeatherInfo(coordinates){
     }
 }
 function renderWeatherInfo(weatherInfo) {
+    console.log("Weather Info -> ", weatherInfo);
     //firstly we have to fetch the elements from the DOM
     const cityName = document.querySelector("[data-cityName]");
     const countryIcon = document.querySelector("[data-countryIcon]");
@@ -100,10 +104,10 @@ function renderWeatherInfo(weatherInfo) {
 
     //now we have to fill the data in the elements(UI) which we fetched from the weatherInfo object
     cityName.innerText = weatherInfo?.name;
-    countryIcon.src = 'https://flagcdn.com/144x108/${weatherInfo?.sys?.country.toLowerCase()}.png';
+    countryIcon.src = `https://flagcdn.com/144x108/${weatherInfo?.sys?.country.toLowerCase()}.png`;
     //because ye ek image hai, toh src attribute use karenge
     weatherDescription.innerText = weatherInfo?.weather[0]?.description;
-    weatherIcon.src = 'https://openweathermap.org/img/wn/${weatherInfo?.weather[0]?.icon}.png';
+    weatherIcon.src = `http://openweathermap.org/img/w/${weatherInfo?.weather?.[0]?.icon}.png`;
     temp.innerText = weatherInfo?.main?.temp.toFixed(2);
     windSpeed.innerText = weatherInfo?.wind?.speed;
     humidity.innerText = weatherInfo?.main?.humidity;
@@ -144,73 +148,111 @@ grantAccessButton.addEventListener('click', () => {
     else{
         //means browser doesn't support geolocation
         console.log("Browser doesn't support geolocation");
+        alert("Browser doesn't support geolocation");
     }
 });
 
+let searchInput = document.querySelector("[data-searchInput]");
 
+searchForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    //prevents the default behaviour of the form
+    let cityName = searchInput.value;
 
+    if(cityName === ""){
+        alert("Please enter a city name");
+    }
+    else{
+        //fetch weather info using the city name by calling the fetchSearchWeatherInfo function
+        fetchSearchWeatherInfo(cityName);
+    }
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-async function fetchWeatherDetails(){
-    // let latitude = 15.333;
-    // let longitude = 74.333;
-
+async function fetchSearchWeatherInfo(city){
+    //make loading screen visible
+    loadingScreen.classList.add("active");
+    userInfoContainer.classList.remove("active");
+    //removed the old weather info from the UI
+    grantAccessButton.classList.remove("active");
+    //fetch weather info using the city name using the API
     try{
-        let city = "goa";
-    
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-
         const data = await response.json();
-        //now while doing these both(fetch and json conversion) we might get an error
-        //so we need to handle that error by putting it in try catch block
         console.log("Weather data -> ", data);
-
-        // let newPara = document.createElement("p");
-        // newPara.innerHTML = `The weather in ${city} is ${data.weather[0].description} with a temperature of ${data.main.temp} degrees celcius.`;
-        // newPara.textContent = `${data?.main?.temp.toFixed(2)} °C`;
-
-         // document.body.appendChild(newPara);
-
+        loadingScreen.classList.remove("active");
+        userInfoContainer.classList.add("active");
         renderWeatherInfo(data);
- 
-         //    *** IT is a characteristic of a good function to do only one thing, hence we won't process the data here,
-        //  we will do it in another function
-    } 
-    catch(err){
-        //handle the error here
-        console.log("Error Found -> ", err);
+    }
+    catch{
+        loadingScreen.classList.remove("active");
+        alert("Please enter a valid city name");
     }
 
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async function fetchWeatherDetails(){
+//     // let latitude = 15.333;
+//     // let longitude = 74.333;
+
+//     try{
+//         let city = "goa";
     
-}
+//         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+
+//         const data = await response.json();
+//         //now while doing these both(fetch and json conversion) we might get an error
+//         //so we need to handle that error by putting it in try catch block
+//         console.log("Weather data -> ", data);
+
+//         // let newPara = document.createElement("p");
+//         // newPara.innerHTML = `The weather in ${city} is ${data.weather[0].description} with a temperature of ${data.main.temp} degrees celcius.`;
+//         // newPara.textContent = `${data?.main?.temp.toFixed(2)} °C`;
+
+//          // document.body.appendChild(newPara);
+
+//         renderWeatherInfo(data);
+ 
+//          //    *** IT is a characteristic of a good function to do only one thing, hence we won't process the data here,
+//         //  we will do it in another function
+//     } 
+//     catch(err){
+//         //handle the error here
+//         console.log("Error Found -> ", err);
+//     }
+
+// }
