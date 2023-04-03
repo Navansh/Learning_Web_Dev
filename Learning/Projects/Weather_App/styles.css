@@ -1,0 +1,9 @@
+.tab.current-tab{
+    /* targets all HTML elements that have both the "tab" and "click" classes applied to them. */
+    background-color: rgba(219, 226, 239, 0.5);
+    border-radius: 4px;
+}
+
+.form-container.active{
+    scale: 1 ;
+}
