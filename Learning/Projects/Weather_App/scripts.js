@@ -7,6 +7,8 @@ const searchForm = document.querySelector("[data-searchForm]");
 const loadingScreen = document.querySelector(".loading-container");
 const userInfoContainer = document.querySelector(".user-info-container");
 
+//in this file, we aren't defining all the variables at the top, instead we are defining them where they are needed
+
 //initially vairables need????
 const API_KEY = "5202e184eaa8737863c454c7beea0306";
 let currentTab = userTab;
