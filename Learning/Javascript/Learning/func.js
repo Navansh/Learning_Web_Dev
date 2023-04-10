@@ -125,6 +125,17 @@ person.fullName = 'Rahul Kumar';
 // console.log(person.fullName);
 //don't need to call it as person.fullName() as it is not a function its a property
 
+//an example of arrow operator 
+let square = (num) => {
+    return num*num;
+}   
+//we can also write it as
+let square2 = num => num*num;
+//if there is only one parameter we can remove the brackets as well
+// which normally is written as
+// let square3 = function(num){
+//     return num*num;
+// }
 
 
 
