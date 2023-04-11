@@ -137,6 +137,18 @@ let square2 = num => num*num;
 //     return num*num;
 // }
 
+//write php code to concatenate two strings
+// $a = "Hello";
+// $b = "World";
+// echo $a." ".$b;
+
+// write 2 functions in js to concatenate two strings
+function concat(a,b){
+    return a+" "+b;
+}   
+//or
+let concat2 = (a,b) => a+" "+b;
+
 
 
 
