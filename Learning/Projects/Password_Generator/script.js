@@ -16,22 +16,26 @@ let password = "";
 let passwordLength = 10;
 let checkCount = 0;
 //set starting color of circle of password strength to grey
+setIndicator("#ccc");
 handleSlider();
 
 //sets the password length(passwordLength)
 function handleSlider() {
     inputSlider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
-    // const min = inputSlider.min;
-    // const max = inputSlider.max;
-    // inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%"
+    const min = inputSlider.min;
+    const max = inputSlider.max;
+    //set background size of slider such that it fills percentage of the lineat gradient applied and doesn't shrinks it
+    //ye karo 
+    // inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%";
+    // use this function to get slider to light up as you move it, if you are using a still color(w/o gradient)
 }
 
 function setIndicator(color){
     indicator.style.backgroundColor = color;
-    indicator.style.boxShadow = "0 0 0 3px color";
+    indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
+};
 
-}
 
 function getRandomInt(min, max){
    return Math.floor(Math.random() * (max-min)) + min
