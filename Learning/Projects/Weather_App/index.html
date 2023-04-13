@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather-NOW</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="wrapper">
@@ -20,7 +24,7 @@
         <div class="weather-container">
             <!--Grant location container-->
             <!-- this is the initial content visible when the user hasn't granted approval for location -->
-            <div class="grant-location-container">
+            <div class="sub-container grant-location-container">
                 <img src="./assets/location.png" alt="" width="80px" height="80px" loading="lazy">
                 <p>Grant location Access </p>
                 <p>Allow access to get weather Information</p>
@@ -36,14 +40,14 @@
             </form>
 
             <!-- loading screen container -->
-            <div class="loading-container">
+            <div class="sub-container loading-container">
                 <img src="./assets/loading.gif" alt="" width="150px" height="150px" loading="lazy">
                 <p>Loading...</p>
 
             </div>
 
             <!-- show weather info container -->
-            <div class="user-info-container">
+            <div class="sub-container user-info-container">
 
                 <!-- city name and country icon  -->
                 <div class="name">
@@ -55,7 +59,7 @@
                 <p data-weatherDesc></p>
 
                 <!-- weather icon  -->
-                <img data-weatherIcon>
+                <img id="weath-icon" data-weatherIcon>
 
                 <!-- temp  -->
                 <p data-temp></p>
@@ -66,7 +70,7 @@
                     <!-- card 1  -->
                     <div class="parameter">
                         <img src="./assets/wind.png" alt="wind icon">
-                        <p>Wind Speed</p>
+                        <p>WindSpeed</p>
                         <p data-windspeed></p>
                     </div>
 

@@ -110,10 +110,10 @@ function renderWeatherInfo(weatherInfo) {
     //because ye ek image hai, toh src attribute use karenge
     weatherDescription.innerText = weatherInfo?.weather[0]?.description;
     weatherIcon.src = `http://openweathermap.org/img/w/${weatherInfo?.weather?.[0]?.icon}.png`;
-    temp.innerText = weatherInfo?.main?.temp.toFixed(2);
-    windSpeed.innerText = weatherInfo?.wind?.speed;
-    humidity.innerText = weatherInfo?.main?.humidity;
-    cloudiness.innerText = weatherInfo?.clouds?.all;
+    temp.innerText = `${weatherInfo?.main?.temp.toFixed(2)} °C`;
+    windSpeed.innerText =  `${ weatherInfo?.wind?.speed} m/s`;
+    humidity.innerText =  `${weatherInfo?.main?.humidity} %`;
+    cloudiness.innerText = `${weatherInfo?.clouds?.all} %` ;
 
 }
 
