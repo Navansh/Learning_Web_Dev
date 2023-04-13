@@ -6,6 +6,7 @@ const grantAccessContainer = document.querySelector(".grant-location-container")
 const searchForm = document.querySelector("[data-searchForm]");
 const loadingScreen = document.querySelector(".loading-container");
 const userInfoContainer = document.querySelector(".user-info-container");
+const error = document.querySelector(".error404");
 
 //in this file, we aren't defining all the variables at the top, instead we are defining them where they are needed
 
@@ -35,6 +36,7 @@ function switchTab(clickedTab) {
             //main pehle search wale tab pr tha, ab your weather tab visible karna h 
             searchForm.classList.remove("active");
             userInfoContainer.classList.remove("active");
+            error.classList.remove("active");
             //ab main your weather tab me aagya hu, toh weather bhi display karna poadega, so let's check local storage first
             //for coordinates, if we haved saved them there.
             getfromSessionStorage();
@@ -183,11 +185,14 @@ async function fetchSearchWeatherInfo(city){
         console.log("Weather data -> ", data);
         loadingScreen.classList.remove("active");
         userInfoContainer.classList.add("active");
+        error.classList.remove("active");
         renderWeatherInfo(data);
     }
     catch{
         loadingScreen.classList.remove("active");
+        userInfoContainer.classList.remove("active");
         alert("Please enter a valid city name");
+        error.classList.add("active");
     }
 
 }   

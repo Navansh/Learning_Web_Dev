@@ -212,6 +212,17 @@ h1{
     margin-bottom:1px;
     /* because this is then getting the value of margin bottom from above btn class, which sets margin bottom to 10px  */
 }
+.error404{
+    display: none;
+    flex-direction: column;
+}
+.error404.active{
+    display: flex;
+}
+.error404 img{
+    height: 400px;
+    width: 350px;
+}
 
 
 
