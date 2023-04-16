@@ -80,3 +80,54 @@
 .win{
     background-color: rgba(0, 255, 0, 0.3);
 }
+/* write media queries for the game-info and the tic-tac-toe class */
+@media screen and (max-width: 500px){
+    .game-info{
+        top: 5rem;
+        left: 1rem;
+        transform:translateX(65%);
+    }
+   
+    .box{
+        font-size: 2rem;
+    }
+    .btn{
+        bottom: 5rem;
+        left: 1rem;
+        transform:translateX(80%);
+    }
+}
+/* now write media queries for width 200px and 300px */
+@media screen and (max-width: 300px){
+    .game-info{
+        top: 4rem;
+        left: 1rem;
+        transform:translateX(25%);
+    }
+   
+    .box{
+        font-size: 1.5rem;
+    }
+    .btn{
+        bottom: 1rem;
+        left: 1rem;
+        transform:translateX(40%);
+    }
+}
+@media screen and (max-width: 200px){
+    .game-info{
+        top: 8rem;
+        left: 1rem;
+        transform:translateX(-5%);
+    }
+   
+    .box{
+        font-size: 1.5rem;
+    }
+    .btn{
+        bottom: 4rem;
+        left: 1rem;
+        transform:translateX(5%);
+    }
+}
+
