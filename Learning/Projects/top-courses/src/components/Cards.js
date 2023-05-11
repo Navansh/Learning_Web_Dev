@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from './Card';
 const Cards = ({courses}) => {
 
@@ -6,6 +6,8 @@ const Cards = ({courses}) => {
     //hence we first merge all the data and create a new data1
 
     let allCourses = [];
+    //here we setup variable which will keep tracks of all the liked courses on the website 
+    const[likedCourses,setLikedCourses] = useState([]);
 
     const getCourses = ()=>{
         //now we are dealing with 2 arrays, first the categories ka array and then uss category ke andar ke data ka 
@@ -27,8 +29,7 @@ const Cards = ({courses}) => {
     <div className='flex flex-wrap justify-center gap-4 mb-4'>
         {
             getCourses().map((course)=>{
-              {/* return (<Card key={course.id} course={course}/>) */}
-              return ( <Card course={course} key={course.id}/>);
+              return ( <Card course={course} key={course.id} likedCourses={likedCourses} setLikedCourses={setLikedCourses}/>);
             })
         }
         {/* {courses?( */}

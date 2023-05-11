@@ -13,6 +13,7 @@ function App() {
 
   const[courses,setCourses] = useState(null);
   const[loading,setLoading] = useState(true);
+  const[category, setcategory] = useState('filterData[0].title')
 
   async function fetchData(){
     setLoading(true);
@@ -40,7 +41,7 @@ function App() {
     <div className='flex flex-col min-h-screen'>
        <Navbar></Navbar>
        <div className='bg-[#3e363f]'>
-          <Filter filterData={filterData}></Filter>
+          <Filter filterData={filterData} category={category} setcategory={setcategory}></Filter>
           <div 
             className='w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh ]'>
             {loading ? (<Spinner/>) : (<Cards courses={courses}></Cards>)}
