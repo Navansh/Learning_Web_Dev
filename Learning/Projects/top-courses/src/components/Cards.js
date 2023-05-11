@@ -15,7 +15,7 @@ const Cards = ({courses}) => {
             //now hamein ek course Category muil gyi, now we traverse data inside of this 
             courseCategory.forEach((course)=>{
                 allCourses.push(course);
-            })
+            }) 
         })
         return allCourses;
 
