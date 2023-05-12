@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
 import Card from './Card';
 const Cards = ({courses,category}) => {
+    if(localStorage.getItem("liked-course")){
+        var doit =[];
+        doit = JSON.parse(localStorage.getItem("liked-course"));
+        console.log(doit.length);
+
+    }
+    else{
+        doit = [];
+    }
 
     //now currently we have all the data in segregated form, but in the main view we want all the data(not segregated form)
     //hence we first merge all the data and create a new data1
 
     let allCourses = [];
     //here we setup variable which will keep tracks of all the liked courses on the website 
-    const[likedCourses,setLikedCourses] = useState([]);
+
+    
+    const[likedCourses,setLikedCourses] = useState(doit);
 
     const getCourses = ()=>{
         //now we are dealing with 2 arrays, first the categories ka array and then uss category ke andar ke data ka 

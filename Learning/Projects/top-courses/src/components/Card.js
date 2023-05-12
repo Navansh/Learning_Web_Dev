@@ -1,10 +1,13 @@
 import React from 'react'
 import { FcLike, FcLikePlaceholder } from 'react-icons/fc'
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const Card = ({course,likedCourses,setLikedCourses}) => {
 
-
+    // function myFunction() {
+    //     console.log(likedCourses);
+    //   }
     function clickHandler(){
         //logic
         //checking if the course is already liked 
@@ -19,17 +22,25 @@ const Card = ({course,likedCourses,setLikedCourses}) => {
             //hence insert this course into the liked course array
             if(likedCourses.length===0){
                 setLikedCourses([course.id]);
+                // let do = JSON.stringify(likedCourses);
+                // localStorage.setItem("liked-course",JSON.stringify(likedCourses));
             } else {
                 //this means ki pehle se courses hai array mein
                 setLikedCourses((prev) => [...prev,course.id]);
+                // localStorage.setItem("liked-course",JSON.stringify(likedCourses));
             }
             toast.success("Liked Successfully")
         }
 
-        console.log(likedCourses);
-
-
+        // setTimeout(myFunction, 3000);
+        
     }
+
+    useEffect(() => {
+        localStorage.setItem("liked-course", JSON.stringify(likedCourses));
+      }, [likedCourses]);
+
+
   return (
     <div className='w-[300px] bg-lime-200 rounded-md overflow-hidden'>
         <div className='relative'>
