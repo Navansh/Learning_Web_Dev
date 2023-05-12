@@ -13,7 +13,7 @@ function App() {
 
   const[courses,setCourses] = useState(null);
   const[loading,setLoading] = useState(true);
-  const[category, setcategory] = useState('filterData[0].title')
+  const[category, setCategory] = useState(filterData[0].title);
 
   async function fetchData(){
     setLoading(true);
@@ -38,13 +38,13 @@ function App() {
   },[]); 
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex flex-col min-h-screen bg-[#3e363f]'>
        <Navbar></Navbar>
        <div className='bg-[#3e363f]'>
-          <Filter filterData={filterData} category={category} setcategory={setcategory}></Filter>
+          <Filter filterData={filterData} category={category} setCategory={setCategory}></Filter>
           <div 
             className='w-11/12 max-w-[1200px] mx-auto flex flex-wrap justify-center items-center min-h-[50vh ]'>
-            {loading ? (<Spinner/>) : (<Cards courses={courses}></Cards>)}
+            {loading ? (<Spinner/>) : (<Cards courses={courses} category={category}></Cards>)}
             {/* Yahaan par cards mein error isliya aa rha tha, cz hamne loading ka logic nhi daala tha(not the graphics) */}
             {/* rather the Spinner to load or Cards to load as jab tak api call se fetch ho rha tab cards wale se courses ka data pass hokar */}
             {/* which initially contained null, baaki saare components par jaa rha and null par hi operations ho rhe, which is causing error  */}

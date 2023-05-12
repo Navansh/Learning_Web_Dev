@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 
 const Card = ({course,likedCourses,setLikedCourses}) => {
 
+
     function clickHandler(){
         //logic
         //checking if the course is already liked 
+        console.log(likedCourses);
+
         if(likedCourses.includes(course.id)){
             //hence this course is already liked, so we remove it from the likedCourses array
             setLikedCourses((prev)=>prev.filter((cid)=>(cid!==course.id)));
@@ -23,6 +26,8 @@ const Card = ({course,likedCourses,setLikedCourses}) => {
             toast.success("Liked Successfully")
         }
 
+        console.log(likedCourses);
+
 
     }
   return (
@@ -30,7 +35,7 @@ const Card = ({course,likedCourses,setLikedCourses}) => {
         <div className='relative'>
             <img src={course.image.url} alt="" />
 
-            <div className='w-[40px] h-[40px] bg-white rounded-full absolute right-2 bottom-3 flex justify-center items-center'>
+            <div className='w-[40px] h-[40px] bg-white rounded-full absolute right-2 -bottom-3 flex justify-center items-center'>
                 <button className='' onClick={clickHandler}>
                     {/* //which image will be displayed depends on the current liked state of the image, which can be checked through  */}
                     {/* searching the given sourse id in the Liked Courses array  */}
