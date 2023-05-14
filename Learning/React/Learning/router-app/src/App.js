@@ -6,6 +6,7 @@ import About from './components/About';
 import Labs from './components/Labs';
 import NotFound from './components/NotFound';
 import { NavLink } from 'react-router-dom';
+import MainHeader from './components/MainHeader';
 
 function App() {
   return (
@@ -22,14 +23,16 @@ function App() {
           <li><NavLink to="/about">About</NavLink></li>
           <li><NavLink to="/support">Support</NavLink></li>
           <li><NavLink to="/labs">Labs</NavLink></li>
-          <li><Link to="https://tailwindcss.com/docs/font-weight#customizing-your-theme">Masti</Link></li>
+          <li><Link to="/">Masti</Link></li>
         </ul>
       </nav>
 
 
       <Routes>
-        <Route path='/' element={<Home></Home>}>
+        <Route path='/' element={<MainHeader></MainHeader>}>
           {/* this is called Nested Routing  */}
+          <Route index element={<Home></Home>}></Route>
+          {/* this becomes your default route  */}
           <Route path='/support' element={
             <Support></Support>
           }></Route>
