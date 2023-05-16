@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
+import { toast } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 
-const SignupForm = () => {
 
+const SignupForm = (props) => {
+  let setIsLoggedIn=props.setIsLoggedIn
+
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName : "",
     lastName : "",
@@ -12,7 +17,9 @@ const SignupForm = () => {
     confirmPassword : ""
   })
 
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+
 
   function changeHandler(event){
     setFormData((prevData) =>(
@@ -22,6 +29,18 @@ const SignupForm = () => {
       }
     ))
   }
+
+  function submitHandler(event){
+    event.preventDefault();
+    if(formData.password !== formData.confirmPassword){
+      toast.error("Passwords Do Not Match")
+      return;
+    }
+    setIsLoggedIn(true)
+    toast.success("Signup Successful")
+    console.log(formData)
+    navigate("/dashboard");
+  }
   return (
     <div>
        <div>
@@ -30,7 +49,7 @@ const SignupForm = () => {
           <button>Instructor</button>
       </div>
 
-      <form action="">
+      <form action="" onSubmit={submitHandler}>
         {/* this contains firstName and LastName  */}
         <div>
 
@@ -72,13 +91,13 @@ const SignupForm = () => {
 
           <label htmlFor="">
               <p>Confirm Password<sup>*</sup> </p>
-              <input type={showPassword ? "text" : "password"} required name='confirmPassword' onChange={changeHandler} placeholder='Enter Confirm Password' value={formData.confirmPassword}/>
+              <input type={showPassword2 ? "text" : "password"} required name='confirmPassword' onChange={changeHandler} placeholder='Enter Confirm Password' value={formData.confirmPassword}/>
 
 
-              <span onClick={() =>setShowPassword((prev) => !prev)}>
+              <span onClick={() =>setShowPassword2((prev) => !prev)}>
               {/* this function helps us toggle between true and false of showPassword on clik of the image  */}
               {/* these are 2 icons which will be used to show or hide password  */}
-              {showPassword ? (
+              {showPassword2 ? (
                 <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
               ) : (
                 <AiOutlineEye></AiOutlineEye>
