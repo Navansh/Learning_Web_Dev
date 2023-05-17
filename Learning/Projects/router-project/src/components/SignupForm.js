@@ -39,7 +39,13 @@ const SignupForm = (props) => {
     }
     setIsLoggedIn(true)
     toast.success("Signup Successful")
-    console.log(formData)
+    // console.log(formData)
+    const finalData ={
+      ...formData,
+      accountType
+    }
+    console.log("Printing final account Data")
+    console.log(finalData)
     navigate("/dashboard");
   }
   return (
