@@ -1,32 +1,39 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Spinner from './Spinner';
+import useGif from '../hooks/useGif';
 const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
 
 const Random = () => {
 
-    const [gif, setGif] = useState("");
-    const [loading,setLoading] = useState(false)
+    // const [gif, setGif] = useState("");
+    // const [loading,setLoading] = useState(false)
     
-    async function fetchData(){
-        setLoading(true);
-        const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`
-        const {data} = await axios.get(url);
-        // console.log(data)
-        const imageSource = data.data.images.downsized_large.url;
-        // console.log(imageSource)
-        setGif(imageSource)
-        setLoading(false)
-    }
+    // async function fetchData(){
+    //     setLoading(true);
+    //     const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`
+    //     const {data} = await axios.get(url);
+    //     // console.log(data)
+    //     const imageSource = data.data.images.downsized_large.url;
+    //     // console.log(imageSource)
+    //     setGif(imageSource)
+    //     setLoading(false)
+    // }
 
-    useEffect(()=>{
-        //sirf pehle render par hi call karna hai
-        fetchData();
-    },[])
+    // useEffect(()=>{
+    //     //sirf pehle render par hi call karna hai
+    //     fetchData();
+    // },[])
+
+    //this all we don't need as we are using our own custom hook for this code's implementation
+
+    const {gif, loading, fetchData} = useGif();
+
 
     function clickHandler(){
         fetchData()
     }
+    
   return (
     <div className=' bg-green-500 w-1/2 rounded-md border border-black flex flex-col items-center gap-y-5
     mt-[15px]'>
