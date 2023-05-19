@@ -11,19 +11,19 @@ const Blogs = () => {
     console.log(posts)
 
   return (
-    <div className=' w-11/12 mx-auto max-w-[690px] mt-12 py-14 flex flex-col gap-y-7 relative'>
+    <div className=' w-11/12 mx-auto max-w-[690px] scroll-smooth mt-14 mb-10 justify-center items-center py-14 flex flex-col gap-y-7'>
     {
-        loading ? (<Spinner  className="" ></Spinner>) : (
+        loading ? (<Spinner></Spinner>) : (
             
-                 posts.length === 0 ? (
+                  posts.length === 0 ? (
                     <div>
                         <p>Error 404</p>
                     </div>
                 ) : (
                     posts.map((post) => (<Card post={post} key={post.id}/>))
-                ) 
+                )
                 
-                /* <Spinner className="absolute top-5"></Spinner> */
+                
             
         )
     }

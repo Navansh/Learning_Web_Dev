@@ -15,10 +15,18 @@ export default function AppContextProvider({children}){
     //as we currently don't know ki kitne totalPages hai hamaari Blogs mein
 
     //data filling 
-    async function fetchBlogPosts(page = 1){
+    async function fetchBlogPosts(page = 1,tag=null, category){
         //we've set the default value of the page to be 1
         setLoading(true)
-         let url = `${baseUrl}?page=${page}`
+        let url = `${baseUrl}?page=${page}`
+        if(tag){
+            url += `&tag=${tag}`
+        } 
+        if (category) {
+            url += `&category=${category}`
+        }
+        
+
          console.log(url)
          try {
             const result = await fetch(url)

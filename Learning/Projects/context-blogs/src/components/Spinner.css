@@ -1,7 +1,9 @@
 .pl {
     display: block;
+    min-height: 90vh;
     width: 9.375em;
     height: 9.375em;
+    /* transform: translate(50rem,15rem); */
   }
   
   .pl__arrows,

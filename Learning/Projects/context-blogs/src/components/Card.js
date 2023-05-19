@@ -9,7 +9,7 @@ const Card = ({post}) => {
         </p>
         <p className=' text-sm'>Posted on {post.date} </p>
         <p className=' mt-3'> {post.content} </p>
-        <div className=' flex gap-x-1 text-blue-600 text-sm underline mt-2'>
+        <div className='sm:text-xs flex-wrap flex gap-x-1 text-blue-600 text-sm underline mt-2 '>
             {post.tags.map((tag,index) => {
                 return <span key={index}>{`#${tag}`}</span>
             })}
