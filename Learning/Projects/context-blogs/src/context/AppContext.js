@@ -5,6 +5,7 @@ import { baseUrl } from '../baseUrl'
 export const AppContext = createContext();
 
 export default function AppContextProvider({children}){
+    
     //we dont have to explicitly send children to AppContextProvider Function
     //hence jahaan par AppContextProcider ke hum opening and closing tag lagayenge, wahaan se children(uske andar jo data hoga woh mil jayega) mil jayenge
 
