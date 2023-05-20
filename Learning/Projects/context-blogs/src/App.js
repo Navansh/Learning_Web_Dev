@@ -6,6 +6,10 @@ import { useContext } from 'react';
 import { AppContext } from './context/AppContext';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useSearchParams } from 'react-router-dom';
+import Home from '../src/Pages/Home'
+import BlogPage from '../src/Pages/BlogPage'
+import TagPage from './Pages/TagPage';
+import CategoryPage from './Pages/CategoryPage'
  
 function App() {
 
@@ -33,7 +37,7 @@ function App() {
     }else if (location.pathname.includes("categories")) {
       //say tag nhi hai par categories naam ki key hai, then we extract that category and do the API call
       const category = location.pathname.split("/").at(-1).replace("-"," ");
-      fetchBlogPosts(Number(page),null,category) 
+      fetchBlogPosts(Number(page),category) 
       
     }else { 
       //if none this happens then it means a normal API call with page no was called, hence 
