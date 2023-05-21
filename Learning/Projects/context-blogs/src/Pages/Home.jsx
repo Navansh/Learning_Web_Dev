@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div>
       <Header></Header>
-      <div>
+      <div className=' mt-14 py-14'>
         <Blogs></Blogs>
       </div>
       <Pagination></Pagination>

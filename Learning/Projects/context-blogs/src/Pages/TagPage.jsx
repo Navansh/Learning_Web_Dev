@@ -19,16 +19,19 @@ const TagPage = () => {
     <div>
       <Header></Header>
 
-      <div className=''>
+      <div className='flex gap-x-2 py-6  max-w-[690px] mx-auto w-11/12 mt-[100px] items-center'>
 
-        <button onClick={clickHandler}>
+        <button className='border px-4 py-1 rounded-md'  onClick={clickHandler}>
           Back
         </button>
 
-        <h2>Blogs Tagged <span>3{tag}</span></h2>
+        <h2 className=' font-bold'>Blogs Tagged <span>{tag}</span></h2>
 
       </div>
-      <Blogs></Blogs>
+      <div className=' mb-20'>
+        <Blogs></Blogs>
+
+      </div>
       <Pagination></Pagination>
     </div>
   )

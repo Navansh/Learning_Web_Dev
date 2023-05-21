@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { baseUrl } from '../baseUrl'
+import { useNavigate } from "react-router-dom";
 
 
 export const AppContext = createContext();
@@ -14,7 +15,7 @@ export default function AppContextProvider({children}){
     const [page,setPage] = useState(1);
     const [totalPages,setTotalPages] = useState(null)
     //as we currently don't know ki kitne totalPages hai hamaari Blogs mein
-
+    const navigate = useNavigate();
     //data filling 
     async function fetchBlogPosts(page = 1,tag=null, category){
         //we've set the default value of the page to be 1
@@ -53,8 +54,10 @@ export default function AppContextProvider({children}){
 
     function handlePageChange(page){
         //the page in the input is the page no. we want the data of 
+        navigate({search : `?page=${page}`})
         setPage(page)
-        fetchBlogPosts(page)
+        // fetchBlogPosts(page)
+
     }
 
 
