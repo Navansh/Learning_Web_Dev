@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import CartItem from '../components/CartItem'
 
 const Cart = () => {
@@ -17,43 +17,44 @@ const Cart = () => {
   return (
     <div>
       {
-        cart.length > 0 ? ( <div>
-          <div>
+        cart.length > 0 ? ( 
+          <div className='max-w-6xl flex mx-auto flex-col md:flex-row justify-center'>
+            <div className=' flex flex-col w-full md:w-3/5'>
 
-            {
-              cart.map((item,index) =>{
-                return <CartItem item = {item} key = {item.id} itemIndex = {index}></CartItem>
-              })
-            }
+              {
+                cart.map((item,index) =>{
+                  return <CartItem item = {item} key = {item.id} itemIndex = {index}></CartItem>
+                })
+              }
 
-          </div>
-
-          <div>
-            <div>
-                <div>Your Cart</div>
-                <div>Summary</div>
-                <p>
-                  Total Items : <span>{cart.length}</span>
-                </p>
             </div>
-            
-            <div>
-              <p>Total Amount <span> {totalAmount} </span></p>
-              <button>
-                Checkout
-              </button>
+
+            <div className=' mt-5 w-full md:w-2/5 flex flex-col p-5 gap-5 my-14  h-[100%] justify-between'>
+              <div className='flex flex-col gap-5 '>
+                  <div className='font-semibold text-xl text-green-800 '>Your Cart</div>
+                  <div className='font-semibold text-5xl text-green-700  -mt-5'>Summary</div>
+                  <p className=' text-xl text-gray-700 font-semibold'>
+                    Total Items : <span>{cart.length}</span>
+                  </p>
+              </div>
+              
+              <div className='flex flex-col'>
+                <p className='text-gray-700 font-semibold text-xl'>Total Amount <span className='text-xl font-bold'> ${totalAmount} </span></p>
+                <button className='bg-green-700 hover:bg-purple-50 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold hover:text-green-700 p-3 text-xl'>
+                  Checkout
+                </button>
+              </div>
+
             </div>
-            
-            
-          </div>
         </div> ) : ( 
-          <div>
-            <h1>Cart Empty</h1>
-            <NavLink path="/">
-              <button>
+          <div className='min-h-[80vh] flex flex-col items-center justify-center'>
+            <h1 className='text-gray-700 font-semibold text-xl mb-2'>Cart Empty</h1>
+            <Link to={"/"}>
+              <button className='bg-green-600 hover:bg-purple-50 rounded-lg text-white transition duration-300
+               ease-linear mt-5 border-2 border-green-600 font-semibold hover:text-green-700 p-3 px-10 tracking-wider'>
                 Shop Now
               </button>
-            </NavLink>
+            </Link>
           </div>
            )
       
