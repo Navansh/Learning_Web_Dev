@@ -23,13 +23,14 @@ const Cart = () => {
 
               {
                 cart.map((item,index) =>{
-                  return <CartItem item = {item} key = {item.id} itemIndex = {index}></CartItem>
+                  return <CartItem item = {item} key = {item.id} itemIndex = {index} stylez={
+                  index !== cart.length - 1 && "border-b-2"}></CartItem>
                 })
               }
 
             </div>
 
-            <div className=' mt-5 w-full md:w-2/5 flex flex-col p-5 gap-5 my-14  h-[100%] justify-between'>
+            <div className=' mt-5 w-full md:w-2/5 flex flex-col p-5 gap-5 my-14 justify-between'>
               <div className='flex flex-col gap-5 '>
                   <div className='font-semibold text-xl text-green-800 '>Your Cart</div>
                   <div className='font-semibold text-5xl text-green-700  -mt-5'>Summary</div>

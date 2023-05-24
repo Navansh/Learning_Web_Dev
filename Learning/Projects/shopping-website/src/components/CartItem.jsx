@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import { remove } from '../redux/Slices/CartSlice';
 import { toast } from 'react-hot-toast';
 
-const CartItem = ({item, itemIndex}) => {
-
+const CartItem = ({item, itemIndex,stylez}) => {
+  console.log(stylez)
   const dispatch = useDispatch();
 
   function removeFromCart(){
@@ -13,11 +13,8 @@ const CartItem = ({item, itemIndex}) => {
     toast.error("Remove from Cart")
   }
   return (
-    <div className='flex flex-col md:flex-row items-center p-2 md:p-5 justify-between  border-slate-500 
-     mt-2 mb-2 md:mx-5 gap-5
-     {
-      cart.length > 0 && border-b-2
-     } '>
+    <div className='flex flex-col md:flex-row items-center p-2 md:p-5 justify-between border-slate-500 
+     mt-2 mb-2 md:mx-5 gap-5 border-b-2 last:border-b-0 '>
       <div className=' w-[30%]'>
         <img src={item.image} className='object-cover ' alt="" />
       </div>
