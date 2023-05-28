@@ -8,7 +8,7 @@ exports.createTodo = async(req,res) =>{
     try {
         //as this is a createTodo call, which means POST request -> Hence data aa rha hoga, jo submit karna hoga
         //hence extract that data
-        //extract title and description from request ki body
+        //so, extracting title and description from request ki body
         const {title, description} = req.body
         const repsonse = await Todo.create({title,description})
         //create a new Todo object and insert in Db
