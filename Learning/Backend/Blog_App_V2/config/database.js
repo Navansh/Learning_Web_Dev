@@ -8,6 +8,7 @@ const dbConnect = () =>{
         useNewUrlParser : true,
         useUnifiedTopology : true
     }).then(() => {
+        //because this is a promise, so we use then method after successful resolution
         console.log("DB ka conenction successful")
     }).catch((error) =>{
         console.log("Error aa gya")

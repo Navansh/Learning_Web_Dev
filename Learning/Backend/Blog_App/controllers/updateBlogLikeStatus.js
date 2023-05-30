@@ -1,7 +1,4 @@
-
 const Blog = require('../models/Blog')
-
-
 
 exports.likeBlog = async(req,res) => {
     try {

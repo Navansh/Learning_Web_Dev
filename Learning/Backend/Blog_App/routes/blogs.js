@@ -2,11 +2,13 @@ const express = require('express')
 const router = express.Router();
 
 const {createBlog} = require("../controllers/ceateBlog");
-const { getBlog } = require('../controllers/getBlog');
+const { getBlog, getAllBlogs } = require('../controllers/getBlog');
 const {likeBlog, dislikeBlog} = require('../controllers/updateBlogLikeStatus')
 const {createComment, getComments} = require('../controllers/createComment')
 
 router.post('/posts/create', createBlog)
+
+router.get('/posts',getAllBlogs)
 
 router.get('/posts/:userName',getBlog)
 
