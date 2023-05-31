@@ -1,5 +1,5 @@
-const Express = require('express')
-const app = Express();
+const express = require('express')
+const app = express();
 //server instantiated
 
 //load config from .env file
@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 4000;
 //ya tph PORT .env file se aayega ya phir by default we'll take it as 4000
 
 //middleware to parse json request body
-app.use(Express.json());
+app.use(express.json());
 
-const blogRoutes = require("./routes/blogs");
-app.use("/api/v1",blogRoutes)
+const blog = require("./routes/blogs");
+app.use("/api/v1",blog)
 
 //starting the server
 app.listen(PORT, () =>{
