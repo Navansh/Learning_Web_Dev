@@ -28,9 +28,10 @@ exports.createComment = async(req,res) => {
                 }
             }, { new : true}
         ).populate("comments").exec();
-        //this is doing : finding by post's id and then pushing the savedComment's id into the comments array of the 
+        //this is doing : finding by post's id and then pushing the savedComment's "ID" into the comments array of the 
         //post, then returning the new and updated value and to the updatedPost variable and then
         //populate the comments array with comment document(entry) and then executing the query
+        //if we hadnt populated, then IDs of the comments would've been visible(in the post) and not the actual comments
 
         res.json({
             post : updatedPost,
