@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt')
 const User = require("../models/User")
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 //signup route handler
 exports.signup = async(req,res) => {
@@ -69,9 +71,9 @@ exports.login = async(req,res) =>{
 
         //now checking if the given User has already Signed Up or not 
 
-        const user = await User.findOne({email});
-        //if not registered 
+        let user = await User.findOne({email});
 
+        //if not registered 
         if (!user) {
             return res.status(401).json({
                 success : false,
@@ -79,10 +81,46 @@ exports.login = async(req,res) =>{
             })
         }
 
+        const payload = {
+            email : user.email,
+            id : user._id,
+            role : user.role
+        }
+
         //verify password and generate a JWT Token
         if (await bcrypt.compare(password, user.password)) {
             //passwords matched,
-            
+            let token = jwt.sign(payload, process.env.JWT_SECRET,
+                {expiresIn : "2h"});
+            //token created
+            user = user.toObject();
+            //Ye Kyu needed hai ? 
+            user.token = token;
+            //ye user ki field Db se nikaali thi and usmein ek token ki field banakar, ye insert kar diya
+            //now we can send this user's data as a cookie, and use it for further authentication
+
+            //but isse toh password bhi chala jayega
+            // so we set the password as undefined
+            user.password = undefined;
+            //***This is only done for our local variable and not in the actual database */
+
+            //creating a cookie and sending it in response
+            const options = {
+                expires : new Date(Date.now() + 3*24*60*60*1000),
+                //the expiration date is 3 days from now, and the time is in ms
+                httpOnly : true
+                //this means client side se ye cookie access nhi ho payegi
+            }
+
+            res.cookie("token", token, options).status(200).json({
+                //cookie ka naam "token" rakha hai and uske andar sirf token hi insert kara hai
+                success : true,
+                token,
+                user,
+                message : "User Logged in successfully"
+            })
+
+
         } else {
             //passwords do not match
             res.status(403).json({
@@ -91,7 +129,12 @@ exports.login = async(req,res) =>{
             })
         }
 
+
     } catch (error) {
-        
+        console.log(error)
+        return res.status(300).json({
+            success : false,
+            message : "Login Failure"
+        })       
     }
 }
