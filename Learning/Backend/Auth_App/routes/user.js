@@ -11,6 +11,16 @@ router.post("/signup", signup)
 
 //Protected Routes
 //jiske paas woh role hoga wohi woh route ko access kar payega
+
+router.get("/test", auth, (req,res) => {
+    res.json({
+        success : true,
+        message : "Welcome to the Protected Route"
+    })
+
+})
+
+
 router.get("/student", auth, isStudent, (req,res) => {
     res.json({
         success : true,
@@ -29,12 +39,6 @@ router.get("/admin", auth, isAdmin, (req,res) => {
     })
 })
 
-router.get("/test", auth, (req,res) => {
-    res.json({
-        success : true,
-        message : "Welcome to the Protected Route"
-    })
 
-})
 
 module.exports = router;
