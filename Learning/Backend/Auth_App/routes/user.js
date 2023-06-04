@@ -32,7 +32,7 @@ router.get("/admin", auth, isAdmin, (req,res) => {
 router.get("/test", auth, (req,res) => {
     res.json({
         success : true,
-        message : "Welcome to the Protected Route for Students"
+        message : "Welcome to the Protected Route"
     })
 
 })
