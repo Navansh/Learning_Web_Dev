@@ -4,57 +4,57 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 //signup route handler
-exports.signup = async(req,res) => {
+exports.signup = async (req, res) => {
+    // Here we are not validating email, but that is also a step to be considered when using this stuff
+    // Actually: Add to To-Do
+  
+    // As this is a POST call, first we fetch the required data
+    const { name, email, password, role } = req.body;
+    console.log(req.body);
+  
     try {
-        //here we are not validating email, but that is also a step to be considered when using this stuff
-        //actually : Add to To Do
-
-        //as this is a post call, so first we fetch the required data
-        const { name, email, password, role } = req.body;
-
-        //check if user already exists
-        //Db interaction
-        const existingUser = await User.findOne({email});
-        //checking if there is an entry in the database with this email,
-        //if it gets any entry it returns the first one amongst them
-        if(existingUser){
-            return res.status(400).json({
-                success : false, 
-                message : "User already exists"
-            });
-        }
-
-        //if this isn't true, then start the process for new User Registration
-        //secure Password
-        let hashedPassword;
-        try {
-            hashedPassword = await bcrypt.hash(password, 10)
-            //apply retry startegy here, that makes you try for this process 3 Times and then throws the error
-        } catch (error) {
-            return res.status(500).json({
-                success : false,
-                message : "Error in Hashing Password"
-            })
-        }
-
-        //now create the user
-        const user = await User.create({
-            name, email, password : hashedPassword, role
-        })
-
-        return res.status(200).json({
-            success : true,
-            message : "User Created Successfully"
-        })
-        
+      // Check if user already exists
+      // DB interaction
+  
+      // Checking if there is an entry in the database with this email,
+      // if it gets any entry, it returns the first one amongst them
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({
+          success: false,
+          message: "User already exists",
+        });
+      }
+  
+      // If this isn't true, then start the process for new user registration
+      // Secure password
+      const hashedPassword = await bcrypt.hash(password, 10);
+      console.log("hashed => ", hashedPassword);
+  
+      // Now create the user
+      const user = new User({
+        name,
+        email,
+        password: hashedPassword,
+        role,
+      });
+  
+      await user.save();
+      console.log("User created successfully!");
+  
+      res.status(200).json({
+        success: true,
+        message: "User created successfully!",
+      });
     } catch (error) {
-        console.error(error)
-        return res.status(500).json({
-            success : false,
-            message : "User Cannot be registered, Please try again"
-        })
+      console.log(error);
+      res.status(500).json({
+        success: false,
+        message: "An error occurred while creating the user",
+      });
     }
-}
+  };
+  
 
 exports.login = async(req,res) =>{
     try {
