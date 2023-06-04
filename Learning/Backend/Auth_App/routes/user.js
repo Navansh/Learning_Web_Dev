@@ -5,7 +5,7 @@ const router = express.Router();
 
 const {login, signup} = require("../controllers/Auth");
 const {auth, isStudent, isAdmin} = require("../middleware/auth")
-
+console.log("/api/v1 reached")
 router.post("/login", login)
 router.post("/signup", signup)
 

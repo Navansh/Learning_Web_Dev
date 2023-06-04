@@ -1,6 +1,6 @@
 //middleware for auth, isStudent, isAdmin
 const jwt = require("jsonwebtoken")
-require("dotenv").config()
+
 
 //1st 
 exports.auth = (req,res,next) => {
