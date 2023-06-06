@@ -6,6 +6,8 @@ require('dotenv').config()
 
 const PORT = process.env.PORT || 4000;
 
+//What is Cookie Parser and why its needed ? 
+
 app.use(express.json());
 
 require('./config/database').connectDb();

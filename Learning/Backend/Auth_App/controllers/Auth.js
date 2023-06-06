@@ -91,7 +91,7 @@ exports.login = async(req,res) =>{
         if (await bcrypt.compare(password, user.password)) {
             //passwords matched,
             let token = jwt.sign(payload, process.env.JWT_SECRET,
-                {expiresIn : "2h"});
+                {expiresIn : "24h"});
             //token created
             user = user.toObject();
             //Ye Kyu needed hai ? 

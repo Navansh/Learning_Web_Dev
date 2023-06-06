@@ -8,8 +8,8 @@ exports.auth = (req,res,next) => {
     try {
         //extract JWT Token : Can be extracted from Header, req.body and from cookie
         //PENDING : Other ways to extract token from 
-        const token = req.body.token
-        console.log(req.body)
+        const token = req.headers.authorization.split(' ')[1]
+        console.log(req.headers.authorization.split(' ')[1])
 
         if(!token){
             return res.status(401).json({
@@ -17,6 +17,8 @@ exports.auth = (req,res,next) => {
                 message : "Token Missing"
             })
         } 
+
+        // console.log(process.env.JWT_SECRET)
 
         //verify the given token which was received from the request's body
         try {
@@ -52,6 +54,7 @@ exports.isStudent = (req,res, next) => {
     //this middleware is for Auth
 
     //ye check karne ke liye ki woh student hai ki nhi can be done through checking its role
+    // console.log(req.user.role)
     try {
         if (req.user.role !== "Student" ) {
             return res.status(401).json({
