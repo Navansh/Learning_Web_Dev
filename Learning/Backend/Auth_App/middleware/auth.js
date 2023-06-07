@@ -7,9 +7,11 @@ exports.auth = (req,res,next) => {
     //This is for auth
     try {
         //extract JWT Token : Can be extracted from Header, req.body and from cookie
-        //PENDING : Other ways to extract token from 
-        const token = req.headers.authorization.split(' ')[1]
-        console.log(req.headers.authorization.split(' ')[1])
+        const token = req.headers.authorization.split(' ')[1] || req.cookies.token
+        //don't use req.body
+        console.log(req.cookies.token)
+        //this will give error if not using cookie parser
+        //header wali configuration is the most preferred one
 
         if(!token){
             return res.status(401).json({
@@ -23,6 +25,8 @@ exports.auth = (req,res,next) => {
         //verify the given token which was received from the request's body
         try {
             const decode = jwt.verify(token, process.env.JWT_SECRET)
+            //we are just verifying here that this token that is being received was sent by us or not
+            
             console.log(decode)
 
             req.user = decode;

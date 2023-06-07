@@ -3,11 +3,27 @@ const User = require("../models/User")
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
+function isValidEmail(email) {
+    // Validate email using regular expressions
+    if (!email) {
+      return false;
+    }
+    const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return pattern.test(email);
+  }
+
+  function isValidPassword(password) {
+    // Validate password using regular expressions
+    if (!password) {
+      return false;
+    }
+    const pattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    return pattern.test(password);
+  }
+
 //signup route handler
 exports.signup = async(req,res) => {
     try {
-        //here we are not validating email, but that is also a step to be considered when using this stuff
-        //actually : Add to To Do
 
         //as this is a post call, so first we fetch the required data
         const { name, email, password, role } = req.body;
@@ -21,6 +37,13 @@ exports.signup = async(req,res) => {
             return res.status(400).json({
                 success : false, 
                 message : "User already exists"
+            });
+        }
+
+        if(!isValidEmail(email) || !isValidPassword(password)){
+            return res.status(400).json({
+                success : false, 
+                message : "Please check email or password"
             });
         }
 
@@ -107,13 +130,14 @@ exports.login = async(req,res) =>{
             //creating a cookie and sending it in response
             const options = {
                 expires : new Date(Date.now() + 3*24*60*60*1000),
-                //the expiration date is 3 days from now, and the time is in ms
+                //the expiration date is 3 days from now, and the time is in ms 
                 httpOnly : true
                 //this means client side se ye cookie access nhi ho payegi
             }
 
             res.cookie("token", token, options).status(200).json({
-                //cookie ka naam "token" rakha hai and uske andar sirf token hi insert kara hai
+                //cookie ka naam "token" rakha hai and uske andar sirf token hi insert kara hai, 
+                // and options toh upar he define kar rakhe hai 
                 success : true,
                 token,
                 user,
