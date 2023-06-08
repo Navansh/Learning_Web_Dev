@@ -11,7 +11,10 @@ const PORT = process.env.PORT || 4000
 app.use(express.json())
 //and as express doesn't have a native support for fileHandling, so we use an external middleware for that 
 const fileUpload = require('express-fileupload')
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : '/tmp/'
+}));
 //this is different from Cloudinary FileUpload, as that uploads to server(its own) and 
 //this express-fileUpload uploads to our mongoDB 
 
@@ -29,7 +32,7 @@ app.use('/api/v1/upload', Upload)
 
 //activate the DB
 app.listen(PORT, () => {
-    console.log(`App is running at {PORT}`)
+    console.log(`App is running at ${PORT}`)
     
 })
 
