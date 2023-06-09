@@ -22,33 +22,17 @@ const fileSchema = new mongoose.Schema({
 // i.e. mongoose.model("File", fileSchema)
 
 //defining our post middleware 
-fileSchema.post("save", async (doc) => {
-    try {
-        console.log(doc)
+fileSchema.post("save",  (doc) => {
 
-        //first we'll have to create our transporter
-        //TO DO : Shift this configuration to config folder
-        let transporter = nodemailer.createTransport({
-            host : process.env.MAIL_HOST,
-            auth : {
-                user : process.env.MAIL_USER,
-                pass : process.env.MAIL_PASS
-            }
+    const mailSender = require('../config/nodemailer');
+    mailSender.sendMail(doc)
+        .then(() => {
+            //as this is an asynchronous function 
         })
+        .catch((err) => {
+        console.log(err);
+    });
 
-        //sending mail
-        let info = await transporter.sendMail({
-            from : `Dennis`,
-            to : doc.email,
-            subject : `New File Uploaded on Cloudinary`,
-            html : `<h2>Hello betaa</h2> <p>New File uploaded beta Link : ${doc.imageUrl} </p>`
-        })
-
-        console.log(info)
-    } catch (error) {
-        console.error(error)
-
-    }
 })
 
 const File = mongoose.model("File", fileSchema)
