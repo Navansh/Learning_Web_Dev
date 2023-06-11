@@ -51,7 +51,6 @@ const userSchema = new mongoose.Schema({
         ref : "CourseProgress"
     }],
 
-
 });
 
 module.exports = mongoose.model('User', userSchema);
