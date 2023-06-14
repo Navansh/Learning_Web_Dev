@@ -41,6 +41,12 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref : "Course"
     }],
+    token : {
+        type: String,
+    },
+    resetPasswordExpires : {
+        type: Date,
+    },
     image : {
         type: String,
         //as this will be replaced by the url of the image

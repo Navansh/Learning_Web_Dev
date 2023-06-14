@@ -6,7 +6,8 @@ const otpGenerator = require('otp-generator');
 const Profile = require('../models/Profile');
 const CourseProgress = require('../models/CourseProgress');
 const Course = require('../models/Course');
-
+const { response } = require('express');
+require('dotenv').config();
 
 //sendOTP
 exports.sendOTP = async (req, res) => {
@@ -60,6 +61,8 @@ exports.sendOTP = async (req, res) => {
         //now as the OTP is generated, we'll save it in the database
         const otpPayload = {email, otp};
         const otpBody = await OTP.create(otpPayload);
+        //and cz OTP ke model par pre save hook laga hai, hence OTP.create se pehle hi email par OTP bhej diya jayega
+
 
         console.log("OTP Body: ",otpBody);
 
@@ -246,6 +249,70 @@ exports.login = async (req, res) => {
         const {email, password} = req.body;
         
         //checking if the email and password is valid or not
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        //validating mandatory fields
+        if (!email || !password) {
+            return res.status(403).json({
+                success: false,
+                message: 'All fields are mandatory',
+            });
+        }
+
+        //validating email
+        if (!email || !emailRegex.test(email)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid email address',
+            });
+        }
+
+        //checking if the user exists or not
+        const user = await User.findOne({email}).populate('additionalDetails');
+        if (!user) {
+            return res.status(401).json({
+                success: false,
+                message: 'User does not exist, Please signup first',
+            });
+        }
+
+        //password matching
+        //then, issue JWT token to the user
+
+        if(await bcrypt.compare(password, user.password)){
+            const payload = {
+                email : user.email,
+                id : user._id,
+                accountType : user.accountType,
+            };
+            const token = jwt.sign(payload, process.env.JWT_SECRET, {
+                expiresIn: '1d',
+            });
+
+            //also attaching the token to the user object, this is NOT on Db
+            user.token = token;
+            user.password = undefined;
+
+            //create cookie and send response
+            const options = {
+                expires: new Date(
+                    Date.now() + 3 * 24 * 60 * 60 * 1000 //3 day
+                ),
+                httpOnly: true,
+            };
+            res.cookie("token", token, options).status(200).json({
+                success: true,
+                token,
+                message: 'User logged in successfully',
+                data: user,
+            });
+        } else {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid Password',
+            });
+        }
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({
@@ -255,6 +322,60 @@ exports.login = async (req, res) => {
     }
 };
 
-
-
 //changePassword and not forget password 
+//as we are not sending any email to the user
+exports.changePassword = async (req, res) => {
+    try {
+        //get data from req's body
+        const {oldPassword, newPassword, confirmNewPassword} = req.body;
+        
+        //get old password, new password and confirm new password
+
+        //validation on password
+        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])(?=.*[a-zA-Z]).{8,}$/;
+        //this pass regex will check for atleast 8 characters, 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character
+
+        if (!oldPassword || !newPassword || !confirmNewPassword) {
+            return res.status(403).json({
+                success: false,
+                message: 'All fields are mandatory',
+            });
+        }
+
+        //now check if the new password and confirm new password are same or not
+        if(newPassword !== confirmNewPassword){
+            return res.status(400).json({
+                success: false,
+                message: 'New Password and Confirm New Password do not match',
+            });
+        }
+
+        //now check if the new password is valid or not
+        if(!newPassword || !passRegex.test(newPassword)){
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid Password',
+            });
+        }
+
+        //find the db Entry of the user, on the basis of the id in the token
+        //which we'll either get from cookies or authorization header. here cookies can work
+        console.log(req)
+        // console.log(user.token)
+        // const user = await User.findById(req.user.id);
+
+        //check if the old password is correct or not, hence we need to verify the supplied password 
+        //with the hashed password in db
+
+        //if the old password is correct, then we'll update the password in the db)){
+
+
+        //update the password in database
+        //send mail of password updation
+
+        // return response
+
+    } catch (error) {
+        
+    }
+};
