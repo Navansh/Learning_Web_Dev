@@ -328,6 +328,9 @@ exports.changePassword = async (req, res) => {
     try {
         //get data from req's body
         const {oldPassword, newPassword, confirmNewPassword} = req.body;
+
+        //user details
+        const userId = req.user.id;
         
         //get old password, new password and confirm new password
 
@@ -358,24 +361,66 @@ exports.changePassword = async (req, res) => {
             });
         }
 
-        //find the db Entry of the user, on the basis of the id in the token
-        //which we'll either get from cookies or authorization header. here cookies can work
-        console.log(req)
-        // console.log(user.token)
-        // const user = await User.findById(req.user.id);
+        //find the db Entry of the user, on the basis of the id req
+        const userDetails = await User.findById(userId);
 
         //check if the old password is correct or not, hence we need to verify the supplied password 
+        const isPasswordMatch = await bcrypt.compare(
+			oldPassword,
+			userDetails.password
+		);
         //with the hashed password in db
 
+        if (!isPasswordMatch) {
+			// If old password does not match, return a 401 (Unauthorized) error
+			return res
+				.status(401)
+				.json({ success: false, message: "The password is incorrect" });
+		}
+
         //if the old password is correct, then we'll update the password in the db)){
-
-
         //update the password in database
+		const encryptedPassword = await bcrypt.hash(newPassword, 10);
+        const updatedUserDetails = await User.findByIdAndUpdate(
+			req.user.id,
+			{ password: encryptedPassword },
+			{ new: true }
+		);
+
+
         //send mail of password updation
+        try {
+			const emailResponse = await mailSender(
+				updatedUserDetails.email,
+				passwordUpdated(
+					updatedUserDetails.email,
+					`Password updated successfully for ${updatedUserDetails.firstName} ${updatedUserDetails.lastName}`
+				)
+			);
+			console.log("Email sent successfully:", emailResponse.response);
+		} catch (error) {
+			// If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
+			console.error("Error occurred while sending email:", error);
+			return res.status(500).json({
+				success: false,
+				message: "Error occurred while sending email",
+				error: error.message,
+			});
+		}
 
         // return response
+        return res.status(200).json({
+            success: true,
+            message: 'Password updated successfully',
+            data: updatedUserDetails,
+        });
+
 
     } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
         
     }
 };

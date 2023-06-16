@@ -89,7 +89,7 @@ exports.deleteAccount = async (req, res) => {
         //we are using setTimeout function to schedule the deletion
 
         //first, we need to get the user again, because we need the createdAt field
-
+        // TODO : 
         setTimeout(async () => {
             //get the user again
             const user = await User.findById(id);
