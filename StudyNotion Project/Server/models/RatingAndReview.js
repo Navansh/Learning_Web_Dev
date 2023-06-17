@@ -20,6 +20,7 @@ const ratingAndReviewSchema = new mongoose.Schema({
 		required: true,
 		ref: "Course",
 		index: true,
+        //index true is used to make the search faster
 	},
 
 });

@@ -4,6 +4,7 @@ const CourseProgress = require('../models/CourseProgress');
 const Section = require('../models/Section');
 const User = require('../models/User');
 const uploadImageToCloudinary = require('../utils/uploadImageToCloudinary');
+const Category = require('../models/Category');
 
 //createCourse
 exports.createCourse = async (req, res) => {
@@ -50,17 +51,13 @@ exports.createCourse = async (req, res) => {
         //check for a valid tag, Why ? as frontend mein toh dropdown hoga
         //as when we'll test this API using Postman, we'll send tag and then this will be required
 
-        const tagDetails = await Tag.findById(tag);
-        //as jo tag body mein se receive kar rhe honge, usmein tag ka id hogi as according to Course model
-        //as woh ID ki tarah hi stored hoga
-
-        if (!tagDetails) {
-            return res.status(400).json({
-                success: false,
-                message: 'Tag not found',
-            });
-        }
-
+        const categoryDetails = await Category.findById(category);
+		if (!categoryDetails) {
+			return res.status(404).json({
+				success: false,
+				message: "Category Details Not Found",
+			});
+		}
         //upload image to cloudinary
         const thumbnailDetails = await uploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME); 
         //tempFilePath is the path where the image is stored temporarily
@@ -139,3 +136,46 @@ exports.getAllCourses = async (req, res) => {
 
     }
 };
+
+exports.getCourseDetails = async (req, res) => {
+    try {
+        const courseID = req.body.courseId;
+        const courseDetails = await Course.findById(courseID)
+                              .populate(
+                                {
+                                    path : 'instructor',
+                                    populate : {
+                                        path : 'additionalDetails',
+                                    }
+                                }
+                              ).populate('category')
+                              .populate('ratingAndReviews')
+                              .populate({
+                                path : 'courseContent',
+                                populate : {
+                                    path : 'subSection',
+                                }
+                              }).exec();
+
+
+        if(!courseDetails){
+            return res.status(404).json({
+                success: false,
+                message: 'Course with courseId : ' + courseID + ' not found',
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: 'Course details fetched successfully',
+            data: courseDetails,
+        });
+        
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+        });
+
+    }
+}
