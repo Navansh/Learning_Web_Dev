@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Course = require('../models/Course');
-const Tag = require('../models/Tag');
+const Category = require('../models/Category');
 const CourseProgress = require('../models/CourseProgress');
 const Section = require('../models/Section');
 

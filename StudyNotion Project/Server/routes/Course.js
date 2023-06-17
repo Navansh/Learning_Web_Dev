@@ -14,7 +14,7 @@ const {
     showAllCategories,
     createCategory,
     categoryPageDetails,
-} = require("../controllers/Category");
+} = require("../controllers/Categories");
 
 // Sections Controllers
 const {
@@ -32,13 +32,13 @@ const {
 
 // Rating Controllers
 const {
-    createRating,
+    createRatingAndReview,
     getAverageRating,
-    getAllRating,
+    getAllRatingAndReview,
 } = require("../controllers/RatingAndReview");
 
 // Importing Middlewares
-const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth");
+const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth");
 
 // ********************************************************************************************************
 //                                      Course routes
@@ -79,11 +79,11 @@ router.post("/categoryPageDetails", categoryPageDetails);
 // ********************************************************************************************************
 
 // Create a Rating
-router.post("/createRating", auth, isStudent, createRating);
+router.post("/createRating", auth, isStudent, createRatingAndReview);
 // Get Average Rating for a Course
 router.get("/getAverageRating/:courseID", getAverageRating);
 // Get All Ratings for a Course
-router.get("/getAllRating/:courseID", getAllRating);
+router.get("/getAllRating/:courseID", getAllRatingAndReview);
 
 
 module.exports = router;

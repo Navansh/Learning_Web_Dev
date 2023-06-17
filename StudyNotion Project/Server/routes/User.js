@@ -7,7 +7,7 @@ const {sendOTP, signup, login, changePassword} = require('../controllers/Auth');
 const {resetPasswordToken, resetPassword} = require('../controllers/ResetPassword');
 
 // Importing Middlewares
-const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth");
+const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth");
 
 // ********************************************************************************************************
 //                                      Auth routes

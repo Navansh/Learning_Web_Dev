@@ -5,7 +5,7 @@ const router = express.Router();
 const {capturePayment, verifySignature} = require('../controllers/Payments');
 
 // Importing Middlewares
-const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth");
+const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth");
 
 // ********************************************************************************************************
 //                                      Payment routes
