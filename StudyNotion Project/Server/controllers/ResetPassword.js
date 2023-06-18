@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const mailSender = require('../utils/mailSender');
-
-
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 
 //resetPasswordToken
 exports.resetPasswordToken = async (req, res) => {
@@ -82,7 +82,7 @@ exports.resetPassword = async (req, res) => {
         //hence to get all the text after the last slash, we'll use split method
         //split method will split the string into an array of strings
         //hence we'll get an array of strings, and we'll get the last element of the array
-        const token = req.params.token.split('/')[req.params.token.split('/').length - 1];
+        const token = req.body.token;
         console.log(token);
 
         //validations : Token and the new password and confirm new password

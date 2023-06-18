@@ -37,7 +37,9 @@ exports.sendOTP = async (req, res) => {
 
         //generate OTP
         var otp = otpGenerator.generate(6, {
-            upperCase: false, specialChars: false, alphabets: false
+            upperCaseAlphabets: false,
+			lowerCaseAlphabets: false,
+			specialChars: false,
         });
 
         console.log("OTP: ",otp);
@@ -103,7 +105,7 @@ exports.signup = async (req, res) => {
         const contactNumberRegex = /^[0-9]{10}$/;
 
         //validating mandatory fields 
-        if (!firstName || !lastName || !email || !password || !confirmPassword || !contactNumber || !otp) {
+        if (!firstName || !lastName || !email || !password || !confirmPassword || !otp) {
             return res.status(400).json({
                 success: false,
                 message: 'All fields are mandatory',
@@ -134,7 +136,7 @@ exports.signup = async (req, res) => {
         }
 
         //validating contact number
-        if (!contactNumber || !contactNumberRegex.test(contactNumber)) {
+        if (contactNumber && !contactNumberRegex.test(contactNumber)) {
             return res.status(400).json({
                 success: false,
                 message: 'Invalid contact number',
@@ -195,6 +197,10 @@ exports.signup = async (req, res) => {
         //and we'll hash the password before saving it in the database
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Create the user
+		let approved = "";
+		approved === "Instructor" ? (approved = false) : (approved = true);
+
         //creating entry in Db
         //for that we first need to create the referencing model objects for the user
         //which are additonaldetails(Profile)
@@ -219,6 +225,7 @@ exports.signup = async (req, res) => {
             email,
             password: hashedPassword,
             accountType,
+            approved: approved,
             contactNumber,
             additionalDetails : profileDetails._id,
             image : `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}%20${lastName}.svg`,
@@ -268,14 +275,15 @@ exports.login = async (req, res) => {
         }
 
         //checking if the user exists or not
-        const user = await User.findOne({email}).populate('additionalDetails');
+        const user = await User.findOne({ email }).select('+password').populate("additionalDetails");
+
         if (!user) {
             return res.status(401).json({
                 success: false,
                 message: 'User does not exist, Please signup first',
             });
         }
-
+        console.log(user)
         //password matching
         //then, issue JWT token to the user
 

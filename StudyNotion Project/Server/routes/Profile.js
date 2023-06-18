@@ -13,17 +13,19 @@ const { auth, isInstructor, isStudent, isAdmin } = require("../middlewares/auth"
 // ********************************************************************************************************
 
 // Update Profile
-router.post("/updateProfile", auth, updateProfile);
+router.put("/updateProfile", auth, updateProfile);
 
 // Get All User Details
 router.get("/getAllUserDetails", auth, getAllUserDetails);
 
 // Delete Account
-router.post("/deleteAccount", deleteAccount);
+router.delete("/deleteProfile", deleteAccount);
 
-// router.post("/updateDisplayPicture", auth, updateDisplayPicture);
+router.put("/updateDisplayPicture", auth, updateDisplayPicture);
 
 // Get Enrolled Courses
-// router.get("/getEnrolledCourses", auth, getEnrolledCourses);
+router.get("/getEnrolledCourses", auth, getEnrolledCourses);
+
+
 module.exports = router;
 

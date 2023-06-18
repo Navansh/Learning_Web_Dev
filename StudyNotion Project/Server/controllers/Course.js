@@ -2,7 +2,7 @@ const Course = require('../models/Course');
 const CourseProgress = require('../models/CourseProgress');
 const Section = require('../models/Section');
 const User = require('../models/User');
-const uploadImageToCloudinary = require('../utils/imageUploader');
+const { uploadImageToCloudinary } = require('../utils/imageUploader');
 const Category = require('../models/Category');
 
 //createCourse
@@ -10,7 +10,7 @@ exports.createCourse = async (req, res) => {
     try {
         //user state currently -> He is logged in 
         //checks -> if he is an instructor
-        const {courseName, courseDescription, whatYouWillLearn, price, tag, language, category} = req.body;
+        let {courseName, courseDescription, whatYouWillLearn, price, tag, language = "English", category,instructions, status} = req.body;
 
         //get thumbnail
         const thumbnail = req.files.thumbnail;
@@ -22,6 +22,10 @@ exports.createCourse = async (req, res) => {
                 message: 'All fields are required',
             });
         }
+
+        if (!status || status === undefined) {
+			status = "Draft";
+		}
 
         //check for instructor
         //why we need to check for instructor ? -> because we need to store its ObjectId in the course document
@@ -62,39 +66,51 @@ exports.createCourse = async (req, res) => {
         //tempFilePath is the path where the image is stored temporarily
 
         //create an entry for new course in the DB
-        const courseDetails = await Course.create({
+        const newCourseDetails = await Course.create({
             courseName,
             courseDescription,
             instructor : instructorDetails._id,
             whatYouWillLearn,
             price,
-            tag : tagDetails._id,
+            tag : tag,
+            category: categoryDetails._id,
+			status: status,
+			instructions: instructions,
             language,
             thumbnail : thumbnailDetails.secure_url,
         });
 
-        console.log(courseDetails);
+        console.log(newCourseDetails);
 
         //update the instructor object with the course id
         //hence effectively pushing the created Course in the instrucotr's courses list
-        await User.findbyIdAndUpdate({_id : instructorDetails._id}, 
+        await User.findByIdAndUpdate({_id : instructorDetails._id}, 
             {
                 $push : {
-                    courses : courseDetails._id,
+                    courses : newCourseDetails._id,
                 },
             },
             {new : true},
         );
 
+        await Category.findByIdAndUpdate(
+			{ _id: category },
+			{
+				$push: {
+					course: newCourseDetails._id,
+				},
+			},
+			{ new: true }
+		);
 
         //update the tag object with the course id
-        tagDetails.course.push(courseDetails._id);
-        await tagDetails.save();
+        // tagDetails.course.push(courseDetails._id);
+        // await tagDetails.save();
         
         return res.status(200).json({
             success: true,
             message: 'Course created successfully',
-            data: courseDetails,
+            data: newCourseDetails,
         });
 
     } catch (error) {
@@ -176,5 +192,55 @@ exports.getCourseDetails = async (req, res) => {
             message: 'Internal server error',
         });
 
+    }
+}
+
+exports.getCourseDetails = async (req, res) => {
+    try {
+            //get id
+            const {courseId} = req.body;
+            //find course details
+            const courseDetails = await Course.find(
+                                        {_id:courseId})
+                                        .populate(
+                                            {
+                                                path:"instructor",
+                                                populate:{
+                                                    path:"additionalDetails",
+                                                },
+                                            }
+                                        )
+                                        .populate("category")
+                                        // .populate("ratingAndreviews")
+                                        .populate({
+                                            path:"courseContent",
+                                            populate:{
+                                                path:"subSections",
+                                            },
+                                        })
+                                        .exec();
+
+                //validation
+                console.log(courseDetails)
+                if(!courseDetails || courseDetails.length === 0) {
+                    return res.status(400).json({
+                        success:false,
+                        message:`Could not find the course with ${courseId}`,
+                    });
+                }
+                //return response
+                return res.status(200).json({
+                    success:true,
+                    message:"Course Details fetched successfully",
+                    data:courseDetails,
+                })
+
+    }
+    catch(error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:error.message,
+        });
     }
 }

@@ -61,7 +61,7 @@ router.post("/addSubSection", auth, isInstructor, createSubSection);
 // Get All Courses
 router.get("/getAllCourses", getAllCourses);
 // Get Course Details
-router.get("/getCourseDetails/:courseID", getCourseDetails);
+router.get("/getCourseDetails", getCourseDetails);
 
 // ********************************************************************************************************
 //                                      Category routes

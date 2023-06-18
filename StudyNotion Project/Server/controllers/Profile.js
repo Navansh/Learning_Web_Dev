@@ -4,18 +4,19 @@
 
 const Profile = require('../models/Profile');
 const User = require('../models/User');
+const {uploadImageToCloudinary} = require('../utils/imageUploader');
 
 exports.updateProfile = async (req, res) => {
     try {
         //if the user is logged in, means by auth middleware, the request already has the decoded token
         //and the token contains, email, accountType, userid
         //we can use the userid to find the user in the database
-        const {dateOfBirth = "", about="", contactNumber, gender} = req.body;
+        const {dateOfBirth = "", about="", contactNumber, gender =""} = req.body;
 
         const id = req.user.id;
 
         //validating the data
-        if (!contactNumber || !gender) {
+        if (!contactNumber) {
             return res.status(400).json({
                 success: false,
                 message: 'Please fill all the fields',
@@ -54,6 +55,7 @@ exports.updateProfile = async (req, res) => {
 //delete account
 exports.deleteAccount = async (req, res) => {
     try {
+        console.log(req.user)
         const id = req.user.id;
 
         //validation
@@ -89,24 +91,25 @@ exports.deleteAccount = async (req, res) => {
         //we are using setTimeout function to schedule the deletion
 
         //first, we need to get the user again, because we need the createdAt field
-        // TODO : 
-        setTimeout(async () => {
-            //get the user again
-            const user = await User.findById(id);
+        // TODO : We'll use cron jobs to schedule the deletion of the user
 
-            //if the user is null, means the user has already been deleted
-            //hence, we need not do anything
-            if(!user){
-                return;
-            }
+        // setTimeout(async () => {
+        //     //get the user again
+        //     const user = await User.findById(id);
 
-            //if the user is not null, means the user has not been deleted
-            //hence, we need to delete the user
-            await User.findByIdAndDelete(id);
+        //     //if the user is null, means the user has already been deleted
+        //     //hence, we need not do anything
+        //     if(!user){
+        //         return;
+        //     }
 
-        }, 3 * 24 * 60 * 60 * 1000); //3 days
+        //     //if the user is not null, means the user has not been deleted
+        //     //hence, we need to delete the user
+        //     await User.findByIdAndDelete(id);
 
+        // }, 3 * 24 * 60 * 60 * 1000); //3 days
 
+        await User.findByIdAndDelete(id);
         return res.status(200).json({
             success: true,
             message: 'Account deleted successfully',
@@ -114,6 +117,7 @@ exports.deleteAccount = async (req, res) => {
         });
 
     } catch (error) {
+        console.error(error);
         return res.status(500).json({
             success: false,
             message: 'Internal server error',
@@ -152,3 +156,58 @@ exports.getAllUserDetails = async (req, res) => {
         });
     }
 }
+
+exports.updateDisplayPicture = async (req, res) => {
+    try {
+      const displayPicture = req.files.displayPicture
+      const userId = req.user.id
+      const image = await uploadImageToCloudinary(
+        displayPicture,
+        process.env.FOLDER_NAME,
+        1000,
+        1000
+      )
+      console.log(image)
+      const updatedProfile = await User.findByIdAndUpdate(
+        { _id: userId },
+        { image: image.secure_url },
+        { new: true }
+      )
+      res.send({
+        success: true,
+        message: `Image Updated successfully`,
+        data: updatedProfile,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
+};
+  
+exports.getEnrolledCourses = async (req, res) => {
+    try {
+      const userId = req.user.id
+      const userDetails = await User.findOne({
+        _id: userId,
+      })
+        .populate("courses")
+        .exec()
+      if (!userDetails) {
+        return res.status(400).json({
+          success: false,
+          message: `Could not find user with id: ${userDetails}`,
+        })
+      }
+      return res.status(200).json({
+        success: true,
+        data: userDetails.courses,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message,
+      })
+    }
+};
