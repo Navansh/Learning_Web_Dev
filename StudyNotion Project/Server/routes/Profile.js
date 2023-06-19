@@ -19,7 +19,7 @@ router.put("/updateProfile", auth, updateProfile);
 router.get("/getAllUserDetails", auth, getAllUserDetails);
 
 // Delete Account
-router.delete("/deleteProfile", deleteAccount);
+router.delete("/deleteProfile",auth, deleteAccount);
 
 router.put("/updateDisplayPicture", auth, updateDisplayPicture);
 

@@ -5,6 +5,7 @@
 const Profile = require('../models/Profile');
 const User = require('../models/User');
 const {uploadImageToCloudinary} = require('../utils/imageUploader');
+const Course = require('../models/Course');
 
 exports.updateProfile = async (req, res) => {
     try {
@@ -55,11 +56,11 @@ exports.updateProfile = async (req, res) => {
 //delete account
 exports.deleteAccount = async (req, res) => {
     try {
-        console.log(req.user)
         const id = req.user.id;
-
+        console.log(req.user.id)
         //validation
-        const userDetails = await User.findById(id);
+		const userDetails = await User.findOne({_id : id});
+        console.log("Printing user details " ,userDetails)
         const profileId = userDetails.additionalDetails;
 
         if(!userDetails || !profileId){
@@ -113,7 +114,6 @@ exports.deleteAccount = async (req, res) => {
         return res.status(200).json({
             success: true,
             message: 'Account deleted successfully',
-            data: deletedUser,
         });
 
     } catch (error) {
